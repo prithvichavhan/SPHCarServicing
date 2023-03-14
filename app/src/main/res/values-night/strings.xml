@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search">Search</string>
+    <string name="select_services_from_below_available_in_the_list">Select services from below available in the list</string>
+</resources>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SPH Car Servicing</string>
+    <string name="txtWelcome">Welcome</string>
+    <string name="viewEditProfile">View / Edit Profile</string>
+    <string name="imgDescription">Image Description</string>
+    <string name="userPlaceholder">Username Placeholder</string>
+    <string name="btnSearchSP">Search Service Provider</string>
+    <string name="btnBookApt">Book Appointment</string>
+    <string name="btnViewApt">View Appointments</string>
+    <string name="btnViewHistory">View Service History</string>
+    <string name="btnLogout">Logout</string>
+    <string name="txtHello">Hello Placeholder</string>
+    <string name="btnSave">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
+    <string name="select_services_from_below_available_in_the_list">Select services from below available in the list</string>
+</resources>
