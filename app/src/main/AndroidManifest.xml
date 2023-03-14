@@ -12,6 +12,9 @@
         android:theme="@style/Theme.SPHCarServicing"
         tools:targetApi="31">
         <activity
+            android:name=".ViewServiceHistory"
+            android:exported="false" />
+        <activity
             android:name=".ViewAppointments"
             android:exported="false" />
         <activity
