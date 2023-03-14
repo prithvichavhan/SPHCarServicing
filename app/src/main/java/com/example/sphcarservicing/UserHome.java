@@ -14,15 +14,23 @@ public class UserHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
 
+        //Declare Buttons
         Button editProfile = findViewById(R.id.btnEditProfile);
         Button searchServiceProviderMain = findViewById(R.id.btnSearchSP);
+        Button bookAppointment = findViewById(R.id.btnBookApt);
         Button viewAppointment = findViewById(R.id.btnViewApt);
+        Button viewServiceHistory = findViewById(R.id.btnViewHistory);
 
+        //Launch Edit Profile Activity
         editProfile.setOnClickListener(view -> startActivity(new Intent(UserHome.this, EditProfile.class)));
 
+        //Launch Search Service Provider Activity
         searchServiceProviderMain.setOnClickListener(view -> startActivity(new Intent(UserHome.this, SearchServiceProvider.class)));
 
-        viewAppointment.setOnClickListener(view -> startActivity(new Intent(UserHome.this, ViewAppointments.class)));
+        //Launch Book Appointment Activity (launches Search Service Provider as mentioned in project guidelines)
+        bookAppointment.setOnClickListener(view -> startActivity(new Intent(UserHome.this, SearchServiceProvider.class)));
 
+        //Launch View Appointment Activity
+        viewAppointment.setOnClickListener(view -> startActivity(new Intent(UserHome.this, ViewAppointments.class)));
     }
 }

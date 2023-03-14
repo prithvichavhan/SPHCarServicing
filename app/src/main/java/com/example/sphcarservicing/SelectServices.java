@@ -1,11 +1,10 @@
 package com.example.sphcarservicing;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SelectServices extends AppCompatActivity {
 
@@ -16,11 +15,6 @@ public class SelectServices extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_services);
 
-        scheduleAppointment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SelectServices.this, ScheduleAppointment.class));
-            }
-        });
+        scheduleAppointment.setOnClickListener(view -> startActivity(new Intent(SelectServices.this, ScheduleAppointment.class)));
     }
 }
