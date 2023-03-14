@@ -16,21 +16,13 @@ public class UserHome extends AppCompatActivity {
 
         Button editProfile = findViewById(R.id.btnEditProfile);
         Button searchServiceProviderMain = findViewById(R.id.btnSearchSP);
+        Button viewAppointment = findViewById(R.id.btnViewApt);
 
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(UserHome.this, EditProfile.class));
-            }
-        });
+        editProfile.setOnClickListener(view -> startActivity(new Intent(UserHome.this, EditProfile.class)));
 
-        searchServiceProviderMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(UserHome.this, SearchServiceProvider.class));
+        searchServiceProviderMain.setOnClickListener(view -> startActivity(new Intent(UserHome.this, SearchServiceProvider.class)));
 
-            }
-        });
+        viewAppointment.setOnClickListener(view -> startActivity(new Intent(UserHome.this, ViewAppointments.class)));
 
     }
 }
