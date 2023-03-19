@@ -55,7 +55,7 @@ public class UserHome extends AppCompatActivity {
 
                 Timer timer = new Timer();
 
-                timer.schedule(task,1000);
+                timer.schedule(task,1200);
             }
         });
 
