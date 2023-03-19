@@ -7,10 +7,15 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class UserHome extends AppCompatActivity {
 
@@ -27,12 +32,32 @@ public class UserHome extends AppCompatActivity {
         Button bookAppointment = findViewById(R.id.btnBookApt);
         Button viewAppointment = findViewById(R.id.btnViewApt);
         Button viewServiceHistory = findViewById(R.id.btnViewHistory);
+        Button logout = findViewById(R.id.btnLogout);
         TextView name = findViewById(R.id.txtName);
         ImageView userimg = findViewById(R.id.imgAvatar);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = preferences.getString("NAME",null);
         name.setText(username);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                preferences.edit().clear().commit();
+                Toast.makeText(UserHome.this,"You're logging out! Bye.",Toast.LENGTH_SHORT).show();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        finish();
+                        startActivity(new Intent(UserHome.this, Login.class));
+                    }
+                };
+
+                Timer timer = new Timer();
+
+                timer.schedule(task,1000);
+            }
+        });
 
         userimg.setImageResource(R.drawable.ic_launcher_background);
 
