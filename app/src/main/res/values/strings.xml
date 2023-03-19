@@ -24,4 +24,5 @@
     <string name="view_edit_appointment">View / Edit Appointment</string>
     <string name="add_view_edit_service_history">Add / View / Edit Service History</string>
     <string name="generate_service_report">Generate Service Report</string>
+    <string name="add_user">Add User</string>
 </resources>
