@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class UserHome extends AppCompatActivity {
@@ -27,21 +28,13 @@ public class UserHome extends AppCompatActivity {
         Button viewAppointment = findViewById(R.id.btnViewApt);
         Button viewServiceHistory = findViewById(R.id.btnViewHistory);
         TextView name = findViewById(R.id.txtName);
+        ImageView userimg = findViewById(R.id.imgAvatar);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String id = preferences.getString("ID",null);
+        String username = preferences.getString("NAME",null);
+        name.setText(username);
 
-        Cursor cursor = databaseHelper.viewUsername(id);
-        StringBuilder str = new StringBuilder();
-        if(cursor.getCount()>0) {
-            while (cursor.moveToNext()) {
-                str.append(cursor.getString(1));
-            }
-        }
-        name.setText(str);
-
-
-
+        userimg.setImageResource(R.drawable.ic_launcher_background);
 
         //Launch Edit Profile Activity
         editProfile.setOnClickListener(view -> startActivity(new Intent(UserHome.this, EditProfile.class)));

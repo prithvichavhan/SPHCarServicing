@@ -22,6 +22,7 @@ public class Register extends AppCompatActivity {
 
         EditText name = findViewById(R.id.editTextTextPersonName2);
         EditText email = findViewById(R.id.editTextTextEmailAddress);
+        EditText address = findViewById(R.id.editTextAddress);
         EditText phone = findViewById(R.id.editTextPhone);
         EditText password = findViewById(R.id.editPwd);
 
@@ -39,11 +40,12 @@ public class Register extends AppCompatActivity {
             boolean isInserted;
             @Override
             public void onClick(View view) {
-                isInserted = databaseHelper.addData(name.getText().toString(),
-                        email.getText().toString(),phone.getText().toString(),
+                isInserted = databaseHelper.addData(email.getText().toString(),
+                        name.getText().toString(),address.getText().toString(),phone.getText().toString(),
                         password.getText().toString());
-                System.out.println(name.getText());
                 System.out.println(email.getText());
+                System.out.println(name.getText());
+                System.out.println(address.getText());
                 System.out.println(phone.getText());
                 System.out.println(password.getText());
 

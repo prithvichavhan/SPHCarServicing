@@ -48,14 +48,23 @@ public class Login extends AppCompatActivity {
                 pass = pwd.getText().toString();
 
                 Cursor cursor = databaseHelper.login(em,pass);
-                StringBuilder str = new StringBuilder();
+                StringBuilder str1 = new StringBuilder();
+                StringBuilder str2 = new StringBuilder();
+                StringBuilder str3 = new StringBuilder();
+                StringBuilder str4 = new StringBuilder();
 
                 if(cursor.getCount()>0) {
                     while (cursor.moveToNext()) {
-                        str.append(cursor.getString(0));
+                        str1.append(cursor.getString(0));
+                        str2.append(cursor.getString(1));
+                        str3.append(cursor.getString(2));
+                        str4.append(cursor.getString(3));
                     }
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("ID", String.valueOf(str));
+                    editor.putString("EMAIL", String.valueOf(str1));
+                    editor.putString("NAME", String.valueOf(str2));
+                    editor.putString("ADDRESS", String.valueOf(str3));
+                    editor.putString("PHONE", String.valueOf(str4));
                     editor.commit();
                     startActivity(new Intent(Login.this, UserHome.class));
                 }

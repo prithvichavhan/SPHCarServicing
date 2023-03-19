@@ -39,6 +39,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:gravity="center"
         android:hint="@string/userPlaceholder"
         android:textColorHint="#78909C"
         android:textSize="24sp"
