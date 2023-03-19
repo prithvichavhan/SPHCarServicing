@@ -5,4 +5,9 @@
     <string name="upcoming_appointments">Upcoming Appointments</string>
     <string name="view_existing_service_history">View Existing Service History</string>
     <string name="regstration">Regstration</string>
+    <string name="create_edit_add_user">Create / Edit / Add User</string>
+    <string name="delete_user">Delete User</string>
+    <string name="view_edit_appointment">View / Edit Appointment</string>
+    <string name="add_view_edit_service_history">Add / View / Edit Service History</string>
+    <string name="generate_service_report">Generate Service Report</string>
 </resources>
