@@ -24,10 +24,11 @@ public class ServiceProviderHome extends AppCompatActivity {
         setContentView(R.layout.activity_service_provider_home);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String email = preferences.getString("EMAIL",null);
 
         dbh = new DatabaseHelper(this);
 
-        Cursor cursor = dbh.viewServiceProviderData();
+        Cursor cursor = dbh.viewSpecificServiceProviderData(email);
         StringBuilder str1 = new StringBuilder();
         StringBuilder str2 = new StringBuilder();
         if(cursor.getCount()>0){
@@ -41,8 +42,11 @@ public class ServiceProviderHome extends AppCompatActivity {
         TextView add = findViewById(R.id.txtSPAddress);
         Button log = findViewById(R.id.logout);
 
-        cn.setText(String.valueOf(str1));
-        add.setText(String.valueOf(str2));
+
+        System.out.println(str1.toString());
+
+        cn.setText(str1.toString());
+        add.setText(str2.toString());
 
         cn.setEnabled(false);
         add.setEnabled(false);

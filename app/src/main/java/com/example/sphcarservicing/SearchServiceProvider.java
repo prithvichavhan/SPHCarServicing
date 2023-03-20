@@ -1,6 +1,9 @@
 package com.example.sphcarservicing;
 
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class SearchServiceProvider extends AppCompatActivity {
+    DatabaseHelper dbh;
 
     // creating variables for
     // our ui components.
@@ -99,13 +103,21 @@ public class SearchServiceProvider extends AppCompatActivity {
 
         // below line we are creating a new array list
         searchModelArrayList = new ArrayList<>();
+        dbh = new DatabaseHelper(this);
 
-        // below line is to add data to our array list.
-        searchModelArrayList.add(new SearchModel("SPH Car Servicing New Westminster", "123 Street, Surrey"));
-        searchModelArrayList.add(new SearchModel("SPH Car Servicing Surrey", "234 Street, Surrey"));
-        searchModelArrayList.add(new SearchModel("SPH Car Servicing Delta", "544 Street, Delta"));
-        searchModelArrayList.add(new SearchModel("SPH Car Servicing Burnaby", "876 Street, Burnaby"));
-        searchModelArrayList.add(new SearchModel("SPH Car Servicing Coquitlam", "789 Street, Coquitlam"));
+        Cursor cursor = dbh.viewServiceProviderData();
+        StringBuilder str1 = new StringBuilder();
+        StringBuilder str2 = new StringBuilder();
+        if(cursor.getCount()>0){
+            while (cursor.moveToNext()){
+                str1.append(cursor.getString(1));
+                str2.append(cursor.getString(2));
+                searchModelArrayList.add(new SearchModel(String.valueOf(str1), String.valueOf(str2)));
+                str1.setLength(0);
+                str2.setLength(0);
+            }
+            // below line is to add data to our array list.
+        }
 
         // initializing our adapter class.
         adapter = new SearchAdapter(searchModelArrayList, SearchServiceProvider.this);
