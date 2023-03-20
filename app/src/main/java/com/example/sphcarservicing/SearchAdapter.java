@@ -11,11 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
-    private ArrayList<SearchModel> searchModelArrayList;
+public class SearchAdapter extends RecyclerView.Adapter {
+    ArrayList<SearchModel> searchModelArrayList;
 
-    public SearchAdapter(ArrayList<SearchModel> searchModelArrayList, Context context) {
-        this.searchModelArrayList = searchModelArrayList;
+    ItemClickListener itemClickListener;
+    LayoutInflater inflater;
+
+    public SearchAdapter(ArrayList<SearchModel> searchModelArrayList1, Context context,ItemClickListener itemClickListener1) {
+        searchModelArrayList = searchModelArrayList1;
+        inflater = LayoutInflater.from(context);
+        itemClickListener = itemClickListener1;
     }
 
     public void filterList(ArrayList<SearchModel> filterList) {
@@ -29,16 +34,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @NonNull
     @Override
-    public SearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_sp_item, parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.search_sp_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
-        SearchModel model = searchModelArrayList.get(position);
-        holder.serviceProviderName.setText(model.getSpName());
-        holder.serviceProviderAddress.setText(model.getSpAddress());
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ((ViewHolder)holder).serviceProviderName.setText(searchModelArrayList.get(position).getSpName());
+        ((ViewHolder)holder).serviceProviderAddress.setText(searchModelArrayList.get(position).getSpAddress());
     }
 
     @Override
@@ -47,14 +52,29 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return searchModelArrayList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView serviceProviderName;
-        private final TextView serviceProviderAddress;
+    String getItem(int id){
+        return searchModelArrayList.get(id).getSpName();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView serviceProviderName;
+        TextView serviceProviderAddress;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             serviceProviderName = itemView.findViewById(R.id.serviceProviderName);
             serviceProviderAddress = itemView.findViewById(R.id.serviceProviderAddress);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(itemClickListener!=null)
+                        itemClickListener.onItemClick(view,getAdapterPosition());
+                }
+            });
         }
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(View view,int position);
     }
 }

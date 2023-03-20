@@ -98,6 +98,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor viewSpecificServiceProviderData_compname(String comp_name){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE2_NAME + " WHERE CName = '"+comp_name+"'";
+
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
 
     public boolean addData(String email,String name, String address,String cell,String password,
                            String status){
