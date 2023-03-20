@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Services2">
+
+    <RadioGroup
+        android:id="@+id/WASHGRP"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="101dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/BRKGRP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtReg3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/washyes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/washno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonRegister4"
+        android:layout_width="234dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="127dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReg4"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txtReg5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="19dp"
+        android:text="Services"
+        app:layout_constraintBottom_toTopOf="@+id/txtReg3"
+        app:layout_constraintEnd_toEndOf="@+id/txtReg3"
+        app:layout_constraintStart_toStartOf="@+id/txtReg3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/BRKGRP"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="246dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtReg4"
+        app:layout_constraintTop_toBottomOf="@+id/WASHGRP">
+
+        <RadioButton
+            android:id="@+id/breakyes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/breakno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtReg4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="104dp"
+        android:text="BREAK CHANGE"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegister4"
+        app:layout_constraintEnd_toStartOf="@+id/BRKGRP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReg3" />
+
+    <TextView
+        android:id="@+id/txtReg3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="95dp"
+        android:text="WASHING"
+        app:layout_constraintBottom_toTopOf="@+id/txtReg4"
+        app:layout_constraintEnd_toStartOf="@+id/WASHGRP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReg5" />
+</androidx.constraintlayout.widget.ConstraintLayout>

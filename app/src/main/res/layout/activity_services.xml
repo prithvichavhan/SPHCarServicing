@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Services"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="-182dp">
+
+    <Button
+        android:id="@+id/buttonRegister3"
+        android:layout_width="234dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="57dp"
+        android:text=" Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReg14"
+        tools:ignore="MissingConstraints" />
+
+    <RadioGroup
+        android:id="@+id/OILGRP"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="23dp"
+        app:layout_constraintBottom_toTopOf="@+id/TIREGRP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtReg13"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/oilyes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/oilno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/TIREGRP"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="31dp"
+        app:layout_constraintBottom_toTopOf="@+id/ENGNGRP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtReg12"
+        app:layout_constraintTop_toBottomOf="@+id/OILGRP">
+
+        <RadioButton
+            android:id="@+id/tyreyes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/tyreno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/ENGNGRP"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="143dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtReg14"
+        app:layout_constraintTop_toBottomOf="@+id/TIREGRP">
+
+        <RadioButton
+            android:id="@+id/engineyes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/engineno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtReg10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="20dp"
+        android:text="Services"
+        app:layout_constraintBottom_toTopOf="@+id/txtReg13"
+        app:layout_constraintEnd_toEndOf="@+id/txtReg13"
+        app:layout_constraintStart_toStartOf="@+id/txtReg13"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtReg12"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="79dp"
+        android:text="TIRE SERVICE"
+        app:layout_constraintBottom_toTopOf="@+id/txtReg14"
+        app:layout_constraintEnd_toStartOf="@+id/TIREGRP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReg13" />
+
+    <TextView
+        android:id="@+id/txtReg13"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="69dp"
+        android:text="OIL CHANGE"
+        app:layout_constraintBottom_toTopOf="@+id/txtReg12"
+        app:layout_constraintEnd_toStartOf="@+id/OILGRP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReg10" />
+
+    <TextView
+        android:id="@+id/txtReg14"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="95dp"
+        android:text="ENGINE SERVICE"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegister3"
+        app:layout_constraintEnd_toStartOf="@+id/ENGNGRP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReg12" />
+</androidx.constraintlayout.widget.ConstraintLayout>

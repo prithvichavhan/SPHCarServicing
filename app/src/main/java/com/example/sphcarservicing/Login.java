@@ -52,6 +52,7 @@ public class Login extends AppCompatActivity {
                 StringBuilder str2 = new StringBuilder();
                 StringBuilder str3 = new StringBuilder();
                 StringBuilder str4 = new StringBuilder();
+                StringBuilder str5 = new StringBuilder();
 
                 if(cursor.getCount()>0) {
                     while (cursor.moveToNext()) {
@@ -59,6 +60,7 @@ public class Login extends AppCompatActivity {
                         str2.append(cursor.getString(1));
                         str3.append(cursor.getString(2));
                         str4.append(cursor.getString(3));
+                        str5.append(cursor.getString(5));
                     }
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("EMAIL", String.valueOf(str1));
@@ -66,7 +68,12 @@ public class Login extends AppCompatActivity {
                     editor.putString("ADDRESS", String.valueOf(str3));
                     editor.putString("PHONE", String.valueOf(str4));
                     editor.commit();
-                    startActivity(new Intent(Login.this, UserHome.class));
+                    if(String.valueOf(str5).equals("1")){
+                        startActivity(new Intent(Login.this, ServiceProviderHome.class));
+                    }
+                    else {
+                        startActivity(new Intent(Login.this, UserHome.class));
+                    }
                 }
                 else
                     Toast.makeText(Login.this,"Sorry user not found",Toast.LENGTH_SHORT).show();
