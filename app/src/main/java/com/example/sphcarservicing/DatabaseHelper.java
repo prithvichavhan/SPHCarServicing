@@ -148,4 +148,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+
+    // for drop table
+    public void dropTable(){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE1_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE2_NAME);
+    }
+
 }
