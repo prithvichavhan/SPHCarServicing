@@ -45,7 +45,8 @@ public class ScheduleAppointment extends AppCompatActivity {
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
 
-                Toast.makeText(ScheduleAppointment.this,"Booking Date is "+currdate[0]+
+                Toast.makeText(ScheduleAppointment.this,"Booking Date is "+currdate[0]
+                        +
                         " and Service Type "+
                         radioButton.getText().toString(),Toast.LENGTH_LONG).show();
             }
