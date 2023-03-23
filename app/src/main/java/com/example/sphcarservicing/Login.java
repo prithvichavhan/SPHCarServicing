@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().clear().commit();
 
         Button register = findViewById(R.id.btnReg);
         EditText email = findViewById(R.id.editTextTextPersonName);

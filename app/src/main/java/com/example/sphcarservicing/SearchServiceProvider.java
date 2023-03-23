@@ -143,6 +143,13 @@ public class SearchServiceProvider extends AppCompatActivity implements SearchAd
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this,"Selected "+adapter.getItem(position),Toast.LENGTH_SHORT).show();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("CNAME", adapter.getItem(position));
+        editor.commit();
+
+
         Intent newActivity = new Intent(this, SelectServices.class);
         newActivity.putExtra("CNAME", adapter.getItem(position));
         startActivity(newActivity);
