@@ -1,11 +1,14 @@
 package com.example.sphcarservicing;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,13 +49,14 @@ public class SelectServices extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String comp_name = intent.getExtras().getString("CNAME");
+        String comp_name = intent.getExtras().getString("SP_NAME");
 
         scheduleAppointment = findViewById(R.id.btnScheduleAppointment);
 
         dbh = new DatabaseHelper(this);
 
         Cursor cursor = dbh.viewSpecificServiceProviderData_compname(comp_name);
+        StringBuilder str0 = new StringBuilder();
         StringBuilder str1 = new StringBuilder();
         StringBuilder str2 = new StringBuilder();
         StringBuilder str3 = new StringBuilder();
@@ -62,6 +66,7 @@ public class SelectServices extends AppCompatActivity {
         StringBuilder str7 = new StringBuilder();
         if(cursor.getCount()>0){
             while (cursor.moveToNext()){
+                str0.append(cursor.getString(8)); //email
                 str1.append(cursor.getString(1));
                 str2.append(cursor.getString(2));
                 str3.append(cursor.getString(3));
@@ -77,6 +82,11 @@ public class SelectServices extends AppCompatActivity {
 
         cn.setText(str1.toString());
         add.setText(str2.toString());
+
+//        Log.d(TAG,str0.toString());
+//        Log.d(TAG,str1.toString());
+//        Log.d(TAG,str2.toString());
+
 
         cn.setEnabled(false);
         add.setEnabled(false);
@@ -116,7 +126,8 @@ public class SelectServices extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     String msg = "You have " + (isChecked ? "selected " + finalCh.getId() : "unchecked") ;
-                    Toast.makeText(SelectServices.this, msg, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(SelectServices.this, msg, Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, msg);
                 }
             });
         }
@@ -145,7 +156,7 @@ public class SelectServices extends AppCompatActivity {
                 }
 
 
-
+                editor.putString("SP_EMAIL", str0.toString());
                 editor.putString("SERVICES", abc);
                 editor.commit();
 

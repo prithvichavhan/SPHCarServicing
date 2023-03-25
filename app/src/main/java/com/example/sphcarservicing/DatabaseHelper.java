@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     final static String DATABASE_NAME = "Information.db";
-    final static int DATABASE_VERSION = 13;
+    final static int DATABASE_VERSION = 16;
 
     //table1
     final static String TABLE1_NAME = "USERS";
@@ -35,6 +35,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     final static String T2COL9 = "BreakChange";
 
 
+    //table3
+    final static String TABLE3_NAME = "Bookings";
+    final static String T3COL1 = "BId";
+    final static String T3COL2 = "SPEmail";
+    final static String T3COL3 = "UEMAIL";
+    final static String T3COL4 = "BTYPE";
+    final static String T3COL5 = "BDATE";
+
+    final static String T3COL6 = "BSERVICES";
+
+
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -52,13 +63,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 T2COL7 + " TEXT," + T2COL8 + " TEXT," + T2COL9 + " TEXT," + T2COL2 + " TEXT," +
                 " FOREIGN KEY ("+T2COL2+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+"))";
         sqLiteDatabase.execSQL(query);
+
+
+        query = "CREATE TABLE " + TABLE3_NAME + "( " + T3COL1 + " INTEGER PRIMARY KEY, " +
+                T3COL2 + " TEXT," + T3COL3 + " TEXT," + T3COL4 + " TEXT," + T3COL5 + " TEXT,"
+                + T3COL6 + " TEXT,"
+                + " FOREIGN KEY ("+T3COL2+") REFERENCES "+TABLE2_NAME+" ("+T2COL2+")," +
+                " FOREIGN KEY ("+T3COL3+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+"))";
+
+        sqLiteDatabase.execSQL(query);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE1_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE2_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE3_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+
+    //adding booking data
+    public boolean addBookingData(String spemail,String uemail, String btype,String bdate,
+                                  String services){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(T3COL2,spemail);
+        values.put(T3COL3,uemail);
+        values.put(T3COL4,btype);
+        values.put(T3COL5,bdate);
+        values.put(T3COL6,services);
+
+        long l = sqLiteDatabase.insert(TABLE3_NAME,null,values);
+
+        if(l>0)
+            return true;
+        else
+            return false;
+    }
+
+    public Cursor viewBookingData(){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME;
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
     }
 
     //insert data in service_provider_details
