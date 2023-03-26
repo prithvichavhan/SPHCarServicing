@@ -31,7 +31,7 @@ public class EditProfile2 extends AppCompatActivity {
         EditText name = findViewById(R.id.firstName);
         EditText phone = findViewById(R.id.userPhone);
         EditText address = findViewById(R.id.userAddress);
-        Button save = findViewById(R.id.btnSave);
+        Button save = findViewById(R.id.btnDelete);
         Button cancel = findViewById(R.id.btnCancel);
 
 

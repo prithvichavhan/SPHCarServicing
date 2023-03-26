@@ -1,9 +1,8 @@
 package com.example.sphcarservicing;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -12,17 +11,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class EditProfile extends AppCompatActivity {
+public class Delete_user_profile extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_delete_user_profile);
 
         databaseHelper = new DatabaseHelper(this);
 
@@ -30,51 +31,54 @@ public class EditProfile extends AppCompatActivity {
         EditText name = findViewById(R.id.firstName);
         EditText phone = findViewById(R.id.userPhone);
         EditText address = findViewById(R.id.userAddress);
-        Button save = findViewById(R.id.btnDelete);
+        Button delete = findViewById(R.id.btnDelete);
         Button cancel = findViewById(R.id.btnCancel);
 
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String user_name = preferences.getString("NAME",null);
-        String user_email = preferences.getString("EMAIL",null);
-        String user_phone = preferences.getString("PHONE",null);
-        String user_address = preferences.getString("ADDRESS",null);
+        String user_name = preferences.getString("U_NAME",null);
+
+        Cursor cursor = databaseHelper.viewSpecificUserData(user_name);
+        StringBuilder str1 = new StringBuilder();
+        StringBuilder str2 = new StringBuilder();
+        StringBuilder str3 = new StringBuilder();
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                str1.append(cursor.getString(0)); //getting email
+                str2.append(cursor.getString(3)); //getting phone
+                str3.append(cursor.getString(2));
+            }
+        }
+
+        String user_email = str1.toString();
+        String user_phone = str2.toString();
+        String user_address = str3.toString();
 
         email.setEnabled(false);
         email.setText(user_email);
+        name.setEnabled(false);
         name.setText(user_name);
+        phone.setEnabled(false);
         phone.setText(user_phone);
+        address.setEnabled(false);
         address.setText(user_address);
 
-        SharedPreferences.Editor edit = PreferenceManager.getDefaultSharedPreferences(this).edit();
-        save.setOnClickListener(new View.OnClickListener() {
-            String newname;
-            String newphone;
-            String newaddress;
+        delete.setOnClickListener(new View.OnClickListener() {
 
             boolean isUpdated;
             @Override
             public void onClick(View view) {
-                newname = name.getText().toString();
-                newphone = phone.getText().toString();
-                newaddress = address.getText().toString();
 
-
-                edit.putString("NAME",newname);
-                edit.putString("ADDRESS",newaddress);
-                edit.putString("PHONE",newphone);
-                edit.apply();
-
-                isUpdated = databaseHelper.updateRec(email.getText().toString(),newname,newphone,newaddress);
+                isUpdated = databaseHelper.deleteUserRec(email.getText().toString());
 
                 if(isUpdated){
-                    Toast.makeText(EditProfile.this,"Record is updated",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Delete_user_profile.this,"User is Deleted",Toast.LENGTH_SHORT).show();
 
                     TimerTask task = new TimerTask() {
                         @Override
                         public void run() {
                             finish();
-                            startActivity(new Intent(EditProfile.this,UserHome.class));
+                            startActivity(new Intent(Delete_user_profile.this,ServiceProviderUserModification.class));
                         }
                     };
 
@@ -83,7 +87,7 @@ public class EditProfile extends AppCompatActivity {
                     timer.schedule(task,1000);
                 }
                 else{
-                    Toast.makeText(EditProfile.this,"Record is not updated",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Delete_user_profile.this,"Oops, User not deleted",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -91,7 +95,7 @@ public class EditProfile extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EditProfile.this,UserHome.class));
+                startActivity(new Intent(Delete_user_profile.this,ServiceProviderDeleteUser.class));
             }
         });
 

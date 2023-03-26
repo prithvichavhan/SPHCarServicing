@@ -63,6 +63,12 @@ public class ServiceProviderHome extends AppCompatActivity {
                 startActivity(new Intent(ServiceProviderHome.this,ServiceProviderUserModification.class));
             }
         });
+        deletedUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ServiceProviderHome.this,ServiceProviderDeleteUser.class));
+            }
+        });
 
         log.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     final static String DATABASE_NAME = "Information.db";
-    final static int DATABASE_VERSION = 22;
+    final static int DATABASE_VERSION = 25;
 
     //table1
     final static String TABLE1_NAME = "USERS";
@@ -71,23 +71,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         query = "CREATE TABLE " + TABLE2_NAME + "( " + T2COL1 + " INTEGER PRIMARY KEY, " +
                 T2COL3 + " TEXT," +T2COL4 + " TEXT," + T2COL5 + " TEXT," +T2COL6 + " TEXT," +
                 T2COL7 + " TEXT," + T2COL8 + " TEXT," + T2COL9 + " TEXT," + T2COL2 + " TEXT," +
-                " FOREIGN KEY ("+T2COL2+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+"))";
+                " FOREIGN KEY ("+T2COL2+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+") ON DELETE CASCADE)";
         sqLiteDatabase.execSQL(query);
 
         //t3
         query = "CREATE TABLE " + TABLE3_NAME + "( " + T3COL1 + " INTEGER PRIMARY KEY, " +
                 T3COL2 + " TEXT," + T3COL3 + " TEXT," + T3COL4 + " TEXT," + T3COL5 + " TEXT,"
                 + T3COL6 + " TEXT,"
-                + " FOREIGN KEY ("+T3COL2+") REFERENCES "+TABLE2_NAME+" ("+T2COL2+")," +
-                " FOREIGN KEY ("+T3COL3+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+"))";
+                + " FOREIGN KEY ("+T3COL2+") REFERENCES "+TABLE2_NAME+" ("+T2COL2+") ON DELETE CASCADE," +
+                " FOREIGN KEY ("+T3COL3+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+") ON DELETE CASCADE)";
 
         sqLiteDatabase.execSQL(query);
 
         //t4
         query = "CREATE TABLE " + TABLE4_NAME + "( " + T4COL1 + " INTEGER PRIMARY KEY, " +
                 T4COL2 + " TEXT," + T4COL3 + " TEXT," + T4COL4 + " TEXT," + T4COL5 + " TEXT,"
-                + " FOREIGN KEY ("+T4COL2+") REFERENCES "+TABLE3_NAME+" ("+T3COL2+")," +
-                " FOREIGN KEY ("+T4COL3+") REFERENCES "+TABLE3_NAME+" ("+T3COL3+"))";
+                + " FOREIGN KEY ("+T4COL2+") REFERENCES "+TABLE2_NAME+" ("+T2COL2+") ON DELETE CASCADE," +
+                " FOREIGN KEY ("+T4COL3+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+") ON DELETE CASCADE )";
 
         sqLiteDatabase.execSQL(query);
     }
@@ -278,6 +278,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(T1COL4,newphone);
         int i = sqLiteDatabase.update(TABLE1_NAME,
                 values,"Email=?",new String[]{email});
+        if(i>0)
+            return true;
+        else
+            return false;
+    }
+    public boolean deleteUserRec(String email){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        int i = sqLiteDatabase.delete(TABLE1_NAME,"Email=?",
+                new String[]{email});
         if(i>0)
             return true;
         else

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,21 @@ public class ServiceProviderUserModification extends AppCompatActivity implement
         setContentView(R.layout.activity_service_provider_user_modifiation);
 
         buildRecyclerView();
+
+        Button addUser = findViewById(R.id.addUser);
+        Button sp_home = findViewById(R.id.sp_home);
+        addUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ServiceProviderUserModification.this,Register_user.class));
+            }
+        });
+        sp_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ServiceProviderUserModification.this,ServiceProviderHome.class));
+            }
+        });
     }
 
     public void buildRecyclerView() {
