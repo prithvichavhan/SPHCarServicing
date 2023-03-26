@@ -46,18 +46,23 @@ public class ServiceProviderHome extends AppCompatActivity {
         TextView add = findViewById(R.id.txtSPAddress);
         Button log = findViewById(R.id.logout);
 
-        alterUser = findViewById(R.id.alterUser);
-        deletedUser = findViewById(R.id.deletedUser);
-        vewEditAppointment = findViewById(R.id.vewEditAppointment);
-        alterServiceHistory = findViewById(R.id.alterServiceHistory);
-
-        System.out.println(str1.toString());
-
         cn.setText(str1.toString());
         add.setText(str2.toString());
 
         cn.setEnabled(false);
         add.setEnabled(false);
+
+        alterUser = findViewById(R.id.alterUser);
+        deletedUser = findViewById(R.id.deletedUser);
+        vewEditAppointment = findViewById(R.id.vewEditAppointment);
+        alterServiceHistory = findViewById(R.id.alterServiceHistory);
+
+        alterUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ServiceProviderHome.this,ServiceProviderUserModification.class));
+            }
+        });
 
         log.setOnClickListener(new View.OnClickListener() {
             @Override

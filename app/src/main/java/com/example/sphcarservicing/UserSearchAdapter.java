@@ -14,14 +14,18 @@ import com.example.sphcarservicing.UserModel;
 
 import java.util.ArrayList;
 
-public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.ViewHolder> {
+public class UserSearchAdapter extends RecyclerView.Adapter  {
 
-    private ArrayList<UserModel> userSearchModelArrayList;
+    ArrayList<UserModel> userSearchModelArrayList;
 
-    public UserSearchAdapter(ArrayList<UserModel> userSearchModelArrayList, Context context) {
-        this.userSearchModelArrayList = userSearchModelArrayList;
+    ItemClickListener itemClickListener;
+    LayoutInflater inflater;
+
+    public UserSearchAdapter(ArrayList<UserModel> userSearchModelArrayList1, Context context, ItemClickListener itemClickListener1) {
+        userSearchModelArrayList = userSearchModelArrayList1;
+        inflater = LayoutInflater.from(context);
+        itemClickListener = itemClickListener1;
     }
-
 
     public void filterList(ArrayList<UserModel> filterList) {
         // below line is to add our filtered
@@ -34,16 +38,16 @@ public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.Vi
 
     @NonNull
     @Override
-    public UserSearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_sp_item, parent, false);
-        return new UserSearchAdapter.ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.search_user_item, parent, false);
+       ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserSearchAdapter.ViewHolder holder, int position) {
-        UserModel umodel = userSearchModelArrayList.get(position);
-        holder.userName.setText(umodel.getUserName());
-        holder.userEmail.setText(umodel.getUserEmail());
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ((ViewHolder)holder).userName.setText(userSearchModelArrayList.get(position).getUserName());
+        ((ViewHolder)holder).userEmail.setText(userSearchModelArrayList.get(position).getUserEmail());
     }
 
     @Override
@@ -52,14 +56,29 @@ public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.Vi
         return userSearchModelArrayList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView userEmail;
-        private final TextView userName;
+    String getItem(int id){
+        return userSearchModelArrayList.get(id).getUserName();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView userName;
+        TextView userEmail;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            userEmail = itemView.findViewById(R.id.userName);
-            userName = itemView.findViewById(R.id.userEmail);
+            userName = itemView.findViewById(R.id.userName);
+            userEmail = itemView.findViewById(R.id.userEmail);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(itemClickListener!=null)
+                        itemClickListener.onItemClick(view,getAdapterPosition());
+                }
+            });
         }
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(View view,int position);
     }
 }

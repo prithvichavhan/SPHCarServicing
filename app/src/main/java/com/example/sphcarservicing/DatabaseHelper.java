@@ -102,6 +102,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public Cursor viewUserData(String status){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Status = '"+status+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+    public Cursor viewSpecificUserData(String name){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Name = '"+name+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
     public Cursor checkService(String uemail){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE3_NAME + " WHERE (CURRENT_DATE > " + T3COL5 + " AND UEMAIL = '"+uemail+"')";

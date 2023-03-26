@@ -60,6 +60,9 @@
             android:name=".EditProfile"
             android:exported="false" />
         <activity
+            android:name=".EditProfile2"
+            android:exported="false" />
+        <activity
             android:name=".UserHome"
             android:exported="false" />
     </application>
