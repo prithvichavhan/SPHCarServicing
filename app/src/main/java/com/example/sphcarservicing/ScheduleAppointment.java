@@ -33,6 +33,7 @@ public class ScheduleAppointment extends AppCompatActivity {
         String SP_EMAIL = preferences.getString("SP_EMAIL",null);
         String UEMAIL = preferences.getString("EMAIL",null);
         String SERVICES = preferences.getString("SERVICES",null);
+        String SP_NAME = preferences.getString("SP_NAME",null);
 
         dbh = new DatabaseHelper(this);
 
@@ -48,8 +49,13 @@ public class ScheduleAppointment extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
 //                currdate[0] = i2 + "/" + (i1+1) + "/" + i; //dd//mm//yyyy
-                currdate[0] = i + "/" + (i1+1) + "/" + i2; //yyyy//mm//dd
-                Log.d(TAG, "onSelectedDayChange: dd/mm/yyyy: "+currdate[0]);
+
+                String selectedDate = String.format("%d-%02d-%02d", i, i1 + 1, i2);
+                currdate[0] = selectedDate;
+
+//                currdate[0] = i + "-" + (i1+1) + "-" + i2; //yyyy//mm//dd
+                Log.d(TAG, "onSelectedDayChange : "+currdate[0]);
+
             }
         });
 

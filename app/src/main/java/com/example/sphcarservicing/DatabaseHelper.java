@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     final static String DATABASE_NAME = "Information.db";
-    final static int DATABASE_VERSION = 16;
+    final static int DATABASE_VERSION = 22;
 
     //table1
     final static String TABLE1_NAME = "USERS";
@@ -45,6 +45,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     final static String T3COL6 = "BSERVICES";
 
+    //table4
+    final static String TABLE4_NAME = "Service_History";
+    final static String T4COL1 = "SId";
+    final static String T4COL2 = "SPEmail";
+    final static String T4COL3 = "UEMAIL";
+    final static String T4COL4 = "BDATE";
+    final static String T4COL5 = "BSERVICES";
+
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -52,24 +60,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        //t1
         String query = "CREATE TABLE " + TABLE1_NAME + "( " + T1COL1 + " TEXT PRIMARY KEY, " +
                 T1COL2 + " TEXT," + T1COL3 + " TEXT," + T1COL4 + " TEXT," + T1COL5 + " TEXT,"
                 + T1COL6 + " TEXT)";
 
         sqLiteDatabase.execSQL(query);
 
+        //t2
         query = "CREATE TABLE " + TABLE2_NAME + "( " + T2COL1 + " INTEGER PRIMARY KEY, " +
                 T2COL3 + " TEXT," +T2COL4 + " TEXT," + T2COL5 + " TEXT," +T2COL6 + " TEXT," +
                 T2COL7 + " TEXT," + T2COL8 + " TEXT," + T2COL9 + " TEXT," + T2COL2 + " TEXT," +
                 " FOREIGN KEY ("+T2COL2+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+"))";
         sqLiteDatabase.execSQL(query);
 
-
+        //t3
         query = "CREATE TABLE " + TABLE3_NAME + "( " + T3COL1 + " INTEGER PRIMARY KEY, " +
                 T3COL2 + " TEXT," + T3COL3 + " TEXT," + T3COL4 + " TEXT," + T3COL5 + " TEXT,"
                 + T3COL6 + " TEXT,"
                 + " FOREIGN KEY ("+T3COL2+") REFERENCES "+TABLE2_NAME+" ("+T2COL2+")," +
                 " FOREIGN KEY ("+T3COL3+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+"))";
+
+        sqLiteDatabase.execSQL(query);
+
+        //t4
+        query = "CREATE TABLE " + TABLE4_NAME + "( " + T4COL1 + " INTEGER PRIMARY KEY, " +
+                T4COL2 + " TEXT," + T4COL3 + " TEXT," + T4COL4 + " TEXT," + T4COL5 + " TEXT,"
+                + " FOREIGN KEY ("+T4COL2+") REFERENCES "+TABLE3_NAME+" ("+T3COL2+")," +
+                " FOREIGN KEY ("+T4COL3+") REFERENCES "+TABLE3_NAME+" ("+T3COL3+"))";
 
         sqLiteDatabase.execSQL(query);
     }
@@ -79,7 +97,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE1_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE2_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE3_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE4_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+
+    public Cursor checkService(String uemail){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE (CURRENT_DATE > " + T3COL5 + " AND UEMAIL = '"+uemail+"')";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
+    public boolean addServiceHistoryData(String spemail,String uemail, String bdate,
+                                  String services){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(T3COL2,spemail);
+        values.put(T3COL3,uemail);
+        values.put(T3COL5,bdate);
+        values.put(T3COL6,services);
+
+        long l = sqLiteDatabase.insert(TABLE4_NAME,null,values);
+
+        if(l>0)
+            return true;
+        else
+            return false;
+    }
+    public Cursor viewServiceHistoryData(String uemail){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE4_NAME + " WHERE UEMAIL = '"+uemail+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
     }
 
 
@@ -102,12 +152,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    public Cursor viewBookingData(){
+    public Cursor viewBookingData(String uemail){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE3_NAME;
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE UEMAIL = '"+uemail+"'";
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         return cursor;
     }
+
+    public boolean deleteBookingData(String uemail,String t3id){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        long l = sqLiteDatabase.delete(TABLE3_NAME,"UEMAIL=? AND BId=?",new String[]{uemail,t3id});
+        if(l>0)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean findExistingServiceHistory(String uemail){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + TABLE4_NAME + " WHERE (UEMAIL = '"+uemail+"' AND SId = '"+t3id+"')";
+        String query = "SELECT * FROM " + TABLE4_NAME + " WHERE UEMAIL = '"+uemail+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        if(cursor.getCount()>0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
 
     //insert data in service_provider_details
     public boolean addServiceProviderData(String cEmail, String cName, String cCity,

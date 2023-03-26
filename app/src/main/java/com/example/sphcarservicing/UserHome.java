@@ -72,5 +72,8 @@ public class UserHome extends AppCompatActivity {
 
         //Launch View Appointment Activity
         viewAppointment.setOnClickListener(view -> startActivity(new Intent(UserHome.this, ViewAppointments.class)));
+
+        //Launch View Service History Activity
+        viewServiceHistory.setOnClickListener(view -> startActivity(new Intent(UserHome.this, ViewServiceHistory.class)));
     }
 }

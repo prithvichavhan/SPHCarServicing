@@ -17,6 +17,10 @@ import java.util.TimerTask;
 
 public class ServiceProviderHome extends AppCompatActivity {
     DatabaseHelper dbh;
+    Button alterUser;
+    Button deletedUser;
+    Button vewEditAppointment;
+    Button alterServiceHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,10 @@ public class ServiceProviderHome extends AppCompatActivity {
         TextView add = findViewById(R.id.txtSPAddress);
         Button log = findViewById(R.id.logout);
 
+        alterUser = findViewById(R.id.alterUser);
+        deletedUser = findViewById(R.id.deletedUser);
+        vewEditAppointment = findViewById(R.id.vewEditAppointment);
+        alterServiceHistory = findViewById(R.id.alterServiceHistory);
 
         System.out.println(str1.toString());
 

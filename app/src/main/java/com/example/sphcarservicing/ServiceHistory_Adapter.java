@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class UserViewAppointment_Adapter extends RecyclerView.Adapter{
+public class ServiceHistory_Adapter extends RecyclerView.Adapter{
 
-    ArrayList<UserViewAppointment_Model> UserViewAppointment_Model_ArrayList;
+    ArrayList<ServiceHistory_Model> ServiceHistory_Model_ArrayList;
 
     ItemClickListener itemClickListener;
     LayoutInflater inflater;
 
-    public UserViewAppointment_Adapter(ArrayList<UserViewAppointment_Model> UserViewAppointment_Model_ArrayList1
+    public ServiceHistory_Adapter(ArrayList<ServiceHistory_Model> ServiceHistory_Model_ArrayList1
             , Context context, ItemClickListener itemClickListener1) {
-        UserViewAppointment_Model_ArrayList = UserViewAppointment_Model_ArrayList1;
+        ServiceHistory_Model_ArrayList = ServiceHistory_Model_ArrayList1;
         inflater = LayoutInflater.from(context);
         itemClickListener = itemClickListener1;
     }
@@ -35,35 +35,28 @@ public class UserViewAppointment_Adapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder)holder).serviceProviderName.setText(UserViewAppointment_Model_ArrayList.get(position).getSpName());
-        ((ViewHolder)holder).serviceProviderAddress.setText(UserViewAppointment_Model_ArrayList.get(position).getSpAddress());
-        ((ViewHolder)holder).AppointDate.setText(UserViewAppointment_Model_ArrayList.get(position).getBdate());
-        ((ViewHolder)holder).AppointType.setText(UserViewAppointment_Model_ArrayList.get(position).getBtype());
-        ((ViewHolder)holder).Service.setText(UserViewAppointment_Model_ArrayList.get(position).getservices());
+        ((ViewHolder)holder).serviceProviderName.setText(ServiceHistory_Model_ArrayList.get(position).getSpName());
+        ((ViewHolder)holder).serviceProviderAddress.setText(ServiceHistory_Model_ArrayList.get(position).getSpAddress());
+        ((ViewHolder)holder).AppointDate.setText(ServiceHistory_Model_ArrayList.get(position).getBdate());
+        ((ViewHolder)holder).Service.setText(ServiceHistory_Model_ArrayList.get(position).getservices());
     }
 
     @Override
     public int getItemCount() {
-        return UserViewAppointment_Model_ArrayList.size();
+        return ServiceHistory_Model_ArrayList.size();
     }
-
-//    String getItem(int id){
-//        return UserViewAppointment_Model_ArrayList.get(id).getSpName();
-//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView serviceProviderName;
         TextView serviceProviderAddress;
         TextView AppointDate;
-        TextView AppointType;
         TextView Service;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             serviceProviderName = itemView.findViewById(R.id.serviceProviderName);
             serviceProviderAddress = itemView.findViewById(R.id.serviceProviderAddress);
-            AppointDate = itemView.findViewById(R.id.txtbox);
-            AppointType = itemView.findViewById(R.id.AppointDate);
+            AppointDate = itemView.findViewById(R.id.AppointDate);
             Service = itemView.findViewById(R.id.Service);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,3 +72,9 @@ public class UserViewAppointment_Adapter extends RecyclerView.Adapter{
         void onItemClick(View view,int position);
     }
 }
+
+
+
+
+
+

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ServiceProviderHome">
 
+    <Button
+        android:id="@+id/notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="23dp"
+        android:text="@string/notification"
+        app:layout_constraintStart_toStartOf="@+id/generateReports"
+        app:layout_constraintTop_toBottomOf="@+id/generateReports" />
+
     <TextView
         android:id="@+id/txtSPTitle"
         android:layout_width="wrap_content"
@@ -44,20 +54,20 @@
         android:id="@+id/deletedUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="16dp"
         android:text="@string/delete_user"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/alterUser"
         app:layout_constraintTop_toBottomOf="@+id/alterUser" />
 
     <Button
         android:id="@+id/vewEditAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="16dp"
         android:text="@string/view_edit_appointment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/alterServiceHistory"
         app:layout_constraintTop_toBottomOf="@+id/deletedUser" />
 
     <Button
@@ -74,17 +84,17 @@
         android:id="@+id/generateReports"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="16dp"
         android:text="@string/generate_service_report"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/alterServiceHistory"
         app:layout_constraintTop_toBottomOf="@+id/alterServiceHistory" />
 
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="17dp"
         android:text="@string/btnLogout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -35,25 +35,35 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/history"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/serviceProviderName"
+            android:layout_marginTop="0dp"
+            android:padding="5dp"
+            android:text="Details"
+            android:textColor="@color/black" />
+
+        <TextView
             android:id="@+id/txtbox"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/serviceProviderAddress"
+            android:layout_below="@id/history"
             android:layout_marginTop="0dp"
             android:padding="5dp"
-            android:text="Booking Date"
+            android:text="Service Done on"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/AppointDate"
             android:layout_width="255dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/serviceProviderAddress"
+            android:layout_below="@id/history"
             android:layout_alignParentStart="true"
             android:layout_marginStart="140dp"
             android:layout_marginTop="0dp"
             android:padding="5dp"
-            android:text="Booking Type"
+            android:text="Booking Date"
             android:textColor="@color/black" />
         <TextView
             android:id="@+id/Service"

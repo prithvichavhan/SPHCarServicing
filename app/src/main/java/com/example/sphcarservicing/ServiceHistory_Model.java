@@ -1,19 +1,16 @@
 package com.example.sphcarservicing;
 
-public class UserViewAppointment_Model {
+public class ServiceHistory_Model {
     private String spName;
     private String spAddress;
     private String bdate;
-    private String btype;
     private String services;
 
 
-    public UserViewAppointment_Model(String sp_name, String sp_add,String b_date,
-                                     String b_type, String b_services) {
+    public ServiceHistory_Model(String sp_name, String sp_add,String b_date, String b_services) {
         this.spName = sp_name;
         this.spAddress = sp_add;
         this.bdate = b_date;
-        this.btype = b_type;
         this.services = b_services;
     }
 
@@ -22,6 +19,5 @@ public class UserViewAppointment_Model {
     }
     public String getSpAddress(){return spAddress;}
     public String getBdate(){return bdate;}
-    public String getBtype(){return btype;}
     public String getservices(){return services;}
 }
