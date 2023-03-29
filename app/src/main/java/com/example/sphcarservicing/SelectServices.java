@@ -56,6 +56,7 @@ public class SelectServices extends AppCompatActivity {
         dbh = new DatabaseHelper(this);
 
         Cursor cursor = dbh.viewSpecificServiceProviderData_compname(comp_name);
+        StringBuilder strID = new StringBuilder();
         StringBuilder str0 = new StringBuilder();
         StringBuilder str1 = new StringBuilder();
         StringBuilder str2 = new StringBuilder();
@@ -66,6 +67,7 @@ public class SelectServices extends AppCompatActivity {
         StringBuilder str7 = new StringBuilder();
         if(cursor.getCount()>0){
             while (cursor.moveToNext()){
+                strID.append(cursor.getString(0));//sp_id
                 str0.append(cursor.getString(8)); //email
                 str1.append(cursor.getString(1));
                 str2.append(cursor.getString(2));
@@ -156,6 +158,7 @@ public class SelectServices extends AppCompatActivity {
                 }
 
 
+                editor.putString("SP_ID", strID.toString());
                 editor.putString("SP_EMAIL", str0.toString());
                 editor.putString("SERVICES", abc);
                 editor.commit();

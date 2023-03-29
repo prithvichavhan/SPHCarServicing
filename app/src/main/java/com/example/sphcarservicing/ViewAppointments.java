@@ -40,7 +40,6 @@ public class ViewAppointments extends AppCompatActivity implements UserViewAppoi
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 str1.append(cursor.getString(1)); //getting email of sp
-
                 str3.append(cursor.getString(4)); //date
                 str4.append(cursor.getString(3)); //type
                 str5.append(cursor.getString(5)); //services

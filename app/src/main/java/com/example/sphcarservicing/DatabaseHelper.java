@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     final static String DATABASE_NAME = "Information.db";
-    final static int DATABASE_VERSION = 25;
+    final static int DATABASE_VERSION = 35;
 
     //table1
     final static String TABLE1_NAME = "USERS";
@@ -44,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     final static String T3COL5 = "BDATE";
 
     final static String T3COL6 = "BSERVICES";
+    final static String T3COL7 = "B_SP_ID";
 
     //table4
     final static String TABLE4_NAME = "Service_History";
@@ -52,6 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     final static String T4COL3 = "UEMAIL";
     final static String T4COL4 = "BDATE";
     final static String T4COL5 = "BSERVICES";
+    final static String T4COL6 = "S_SP_ID";
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -77,8 +79,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //t3
         query = "CREATE TABLE " + TABLE3_NAME + "( " + T3COL1 + " INTEGER PRIMARY KEY, " +
                 T3COL2 + " TEXT," + T3COL3 + " TEXT," + T3COL4 + " TEXT," + T3COL5 + " TEXT,"
-                + T3COL6 + " TEXT,"
-                + " FOREIGN KEY ("+T3COL2+") REFERENCES "+TABLE2_NAME+" ("+T2COL2+") ON DELETE CASCADE," +
+                + T3COL6 + " TEXT, "+ T3COL7 + " INTEGER,"
+                + " FOREIGN KEY ("+T3COL7+") REFERENCES "+TABLE2_NAME+" ("+T2COL1+") ON DELETE CASCADE," +
                 " FOREIGN KEY ("+T3COL3+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+") ON DELETE CASCADE)";
 
         sqLiteDatabase.execSQL(query);
@@ -86,10 +88,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //t4
         query = "CREATE TABLE " + TABLE4_NAME + "( " + T4COL1 + " INTEGER PRIMARY KEY, " +
                 T4COL2 + " TEXT," + T4COL3 + " TEXT," + T4COL4 + " TEXT," + T4COL5 + " TEXT,"
-                + " FOREIGN KEY ("+T4COL2+") REFERENCES "+TABLE2_NAME+" ("+T2COL2+") ON DELETE CASCADE," +
+                + T4COL6 + " INTEGER,"
+                + " FOREIGN KEY ("+T4COL6+") REFERENCES "+TABLE2_NAME+" ("+T2COL1+") ON DELETE CASCADE," +
                 " FOREIGN KEY ("+T4COL3+") REFERENCES "+TABLE1_NAME+" ("+T1COL1+") ON DELETE CASCADE )";
 
         sqLiteDatabase.execSQL(query);
+
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
     }
 
     @Override
@@ -123,13 +131,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean addServiceHistoryData(String spemail,String uemail, String bdate,
-                                  String services){
+                                  String services,String S_SP_ID){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
         ContentValues values = new ContentValues();
-        values.put(T3COL2,spemail);
-        values.put(T3COL3,uemail);
-        values.put(T3COL5,bdate);
-        values.put(T3COL6,services);
+        values.put(T4COL2,spemail);
+        values.put(T4COL3,uemail);
+        values.put(T4COL4,bdate);
+        values.put(T4COL5,services);
+        values.put(T4COL6,S_SP_ID);
 
         long l = sqLiteDatabase.insert(TABLE4_NAME,null,values);
 
@@ -148,14 +161,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //adding booking data
     public boolean addBookingData(String spemail,String uemail, String btype,String bdate,
-                                  String services){
+                                  String services,String B_SP_ID){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
         ContentValues values = new ContentValues();
         values.put(T3COL2,spemail);
         values.put(T3COL3,uemail);
         values.put(T3COL4,btype);
         values.put(T3COL5,bdate);
         values.put(T3COL6,services);
+        values.put(T3COL7,B_SP_ID);
 
         long l = sqLiteDatabase.insert(TABLE3_NAME,null,values);
 
@@ -174,6 +192,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean deleteBookingData(String uemail,String t3id){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
         long l = sqLiteDatabase.delete(TABLE3_NAME,"UEMAIL=? AND BId=?",new String[]{uemail,t3id});
         if(l>0)
             return true;
@@ -201,6 +223,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                                  String OilChange, String TireChange, String EngineService,
                                  String Washing, String BreakChange){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
         ContentValues values = new ContentValues();
         values.put(T2COL2,cEmail);
         values.put(T2COL3,cName);
@@ -245,6 +271,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addData(String email,String name, String address,String cell,String password,
                            String status){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
         ContentValues values = new ContentValues();
         values.put(T1COL1,email);
         values.put(T1COL2,name);
@@ -272,6 +303,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean updateRec(String email,String newname,String newphone, String newaddress){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
         ContentValues values = new ContentValues();
         values.put(T1COL2,newname);
         values.put(T1COL3,newaddress);
@@ -285,6 +320,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public boolean deleteUserRec(String email){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
         int i = sqLiteDatabase.delete(TABLE1_NAME,"Email=?",
                 new String[]{email});
         if(i>0)

@@ -30,6 +30,7 @@ public class ScheduleAppointment extends AppCompatActivity {
         setContentView(R.layout.activity_schedule_appointment);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String SP_ID = preferences.getString("SP_ID",null);
         String SP_EMAIL = preferences.getString("SP_EMAIL",null);
         String UEMAIL = preferences.getString("EMAIL",null);
         String SERVICES = preferences.getString("SERVICES",null);
@@ -78,9 +79,9 @@ public class ScheduleAppointment extends AppCompatActivity {
 
                 Log.d(TAG,"SP : "+SP_EMAIL + " UEMAIL : "+UEMAIL
                 + " BTYPE : " + radioButton.getText().toString() + " BDATE : "+
-                        currdate[0]+ " BSERVICES: "+SERVICES);
+                        currdate[0]+ " BSERVICES: "+SERVICES+ " SP_ID : "+ SP_ID);
 
-                isInserted = dbh.addBookingData(SP_EMAIL,UEMAIL,btype,currdate[0],SERVICES);
+                isInserted = dbh.addBookingData(SP_EMAIL,UEMAIL,btype,currdate[0],SERVICES,SP_ID);
 
                 if(isInserted){
                     Toast.makeText(ScheduleAppointment.this,"You appointment has been" +
