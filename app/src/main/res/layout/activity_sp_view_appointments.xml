@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ViewAppointments">
 
+
     <TextView
         android:id="@+id/txtViewAppointment"
         android:layout_width="wrap_content"
@@ -28,4 +29,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewAppointment" />
+    <Button
+        android:id="@+id/sp_home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="26dp"
+        android:text="Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

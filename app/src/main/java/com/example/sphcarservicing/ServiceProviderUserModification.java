@@ -96,6 +96,5 @@ public class ServiceProviderUserModification extends AppCompatActivity implement
         editor.commit();
 
         startActivity(new Intent(ServiceProviderUserModification.this,EditProfile2.class));
-
     }
 }

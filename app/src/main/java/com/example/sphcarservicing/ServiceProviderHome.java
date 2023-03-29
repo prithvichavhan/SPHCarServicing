@@ -69,6 +69,12 @@ public class ServiceProviderHome extends AppCompatActivity {
                 startActivity(new Intent(ServiceProviderHome.this,ServiceProviderDeleteUser.class));
             }
         });
+        vewEditAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ServiceProviderHome.this,SpViewAppointments.class));
+            }
+        });
 
         log.setOnClickListener(new View.OnClickListener() {
             @Override

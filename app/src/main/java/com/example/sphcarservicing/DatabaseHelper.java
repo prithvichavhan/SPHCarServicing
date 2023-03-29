@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     final static String DATABASE_NAME = "Information.db";
-    final static int DATABASE_VERSION = 35;
+    final static int DATABASE_VERSION = 37;
 
     //table1
     final static String TABLE1_NAME = "USERS";
@@ -190,6 +190,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor spviewBookingData(String SPEmail){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE SPEmail = '"+SPEmail+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
     public boolean deleteBookingData(String uemail,String t3id){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         if (!sqLiteDatabase.isReadOnly()) {
@@ -318,6 +325,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+
+    public Cursor viewSpecificServiceUserData(String email){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Email = '"+email+"'";
+
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
     public boolean deleteUserRec(String email){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         if (!sqLiteDatabase.isReadOnly()) {

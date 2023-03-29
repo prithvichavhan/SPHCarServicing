@@ -38,9 +38,11 @@ public class ViewServiceHistory extends AppCompatActivity implements ServiceHist
         Cursor maincursor = dbh.viewServiceHistoryData(user_email);
 
         count = maincursor.getCount();
+        System.out.println(count);
         if(maincursor.getCount() > count){
             //take data from service history
             tempfunc(user_email);
+
         }
         else{
             Cursor cursor = dbh.checkService(user_email);
@@ -69,6 +71,11 @@ public class ViewServiceHistory extends AppCompatActivity implements ServiceHist
                 if(isInserted){
                     Toast.makeText(ViewServiceHistory.this,"Data for service history is entered",Toast.LENGTH_SHORT).show();
                     count += 1;
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView1);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    adapter = new ServiceHistory_Adapter(ServiceHistory_Model_ArrayList,
+                            this, this);
+                    recyclerView.setAdapter(adapter);
                     isDeleted = dbh.deleteBookingData(user_email,str0.toString());
                     if(isDeleted){
                         Log.d(TAG,"Booking data is deleted..");
@@ -79,12 +86,22 @@ public class ViewServiceHistory extends AppCompatActivity implements ServiceHist
                 }
                 else {
                     Toast.makeText(ViewServiceHistory.this,"Sorry not registered",Toast.LENGTH_SHORT).show();
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView1);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    adapter = new ServiceHistory_Adapter(ServiceHistory_Model_ArrayList,
+                            this, this);
+                    recyclerView.setAdapter(adapter);
                 }
 
             }
             else {
                 Toast.makeText(this,"Service History",Toast.LENGTH_SHORT).show();
                 System.out.println(count);
+                RecyclerView recyclerView = findViewById(R.id.recyclerView1);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                adapter = new ServiceHistory_Adapter(ServiceHistory_Model_ArrayList,
+                        this, this);
+                recyclerView.setAdapter(adapter);
             }
 
 

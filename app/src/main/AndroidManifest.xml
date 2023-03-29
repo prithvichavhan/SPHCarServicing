@@ -51,6 +51,9 @@
             android:name=".ViewAppointments"
             android:exported="false" />
         <activity
+            android:name=".SpViewAppointments"
+            android:exported="false" />
+        <activity
             android:name=".ScheduleAppointment"
             android:exported="false" />
         <activity
