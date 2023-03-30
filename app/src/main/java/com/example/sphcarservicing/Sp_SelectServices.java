@@ -19,42 +19,45 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SelectServices extends AppCompatActivity {
+public class Sp_SelectServices extends AppCompatActivity {
 
     DatabaseHelper dbh;
-    Button scheduleAppointment;
+    Button scheduleAppointment_new;
 
 
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_services);
+        setContentView(R.layout.activity_sp_select_services);
 
 
         LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // Create Checkbox Dynamically
-//        CheckBox checkBox = new CheckBox(this);
-//        checkBox.setText(R.string.check_it);
-//        checkBox.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                String msg = "You have " + (isChecked ? "checked" : "unchecked") + " this Check it Checkbox.";
-//                Toast.makeText(SelectServices.this, msg, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
-        Intent intent = getIntent();
-        String comp_name = intent.getExtras().getString("SP_NAME");
-
-        scheduleAppointment = findViewById(R.id.newapp);
+        Integer bookin_id = preferences.getInt("BOOKING_ID",10000);
 
         dbh = new DatabaseHelper(this);
 
-        Cursor cursor = dbh.viewSpecificServiceProviderData_compname(comp_name);
+        Cursor cursor1 = dbh.viewBookingDataSP(bookin_id);
+        StringBuilder comp_email = new StringBuilder();
+        StringBuilder user_email = new StringBuilder();
+        if(cursor1.getCount()>0) {
+            while (cursor1.moveToNext()) {
+                comp_email.append(cursor1.getString(1));
+                user_email.append(cursor1.getString(2));
+            }
+        }
+
+        Cursor cursor2 = dbh.viewSpecificServiceUserData(user_email.toString());
+        StringBuilder user_name = new StringBuilder();
+        if(cursor2.getCount()>0) {
+            while (cursor2.moveToNext()) {
+                user_name.append(cursor1.getString(1));
+            }
+        }
+
+        Cursor cursor = dbh.viewSpecificServiceProviderData(comp_email.toString());
         StringBuilder strID = new StringBuilder();
         StringBuilder str0 = new StringBuilder();
         StringBuilder str1 = new StringBuilder();
@@ -81,8 +84,8 @@ public class SelectServices extends AppCompatActivity {
         TextView cn = findViewById(R.id.textServiceTitle);
         TextView add = findViewById(R.id.textServiceAddress);
 
-        cn.setText(str1.toString());
-        add.setText(str2.toString());
+        cn.setText(user_name);
+        add.setText(user_email);
 
 //        Log.d(TAG,str0.toString());
 //        Log.d(TAG,str1.toString());
@@ -133,13 +136,13 @@ public class SelectServices extends AppCompatActivity {
             });
         }
 
-        Button btnScheduleAppointment = findViewById(R.id.newapp);
+        scheduleAppointment_new = findViewById(R.id.newapp);
 
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         SharedPreferences.Editor editor = preferences.edit();
 
-        btnScheduleAppointment.setOnClickListener(new View.OnClickListener() {
+        scheduleAppointment_new.setOnClickListener(new View.OnClickListener() {
             String abc="";
             @Override
             public void onClick(View view) {
@@ -156,15 +159,12 @@ public class SelectServices extends AppCompatActivity {
                     }
                 }
 
-
-                editor.putString("SP_ID", strID.toString());
-                editor.putString("SP_EMAIL", str0.toString());
-                editor.putString("SERVICES", abc);
+                editor.putString("NEW_SERVICES", abc);
                 editor.commit();
 
 
-                Toast.makeText(SelectServices.this,abc,Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(SelectServices.this,ScheduleAppointment.class));
+                Toast.makeText(Sp_SelectServices.this,abc,Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Sp_SelectServices.this,Sp_ScheduleAppointment.class));
             }
         });
 

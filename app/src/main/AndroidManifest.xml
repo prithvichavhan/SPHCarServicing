@@ -57,7 +57,13 @@
             android:name=".ScheduleAppointment"
             android:exported="false" />
         <activity
+            android:name=".Sp_ScheduleAppointment"
+            android:exported="false" />
+        <activity
             android:name=".SelectServices"
+            android:exported="false" />
+        <activity
+            android:name=".Sp_SelectServices"
             android:exported="false" />
         <activity
             android:name=".SearchServiceProvider"

@@ -58,7 +58,7 @@ public class SpViewAppointments extends AppCompatActivity implements spViewAppoi
                 str5.append(cursor.getString(5)); //services
 
 
-                System.out.println(str1.toString());
+                System.out.println(str1);
                 Cursor cursor1 = dbh.viewSpecificServiceUserData(str1.toString());
                 StringBuilder sp_details = new StringBuilder();
                 StringBuilder sp_details1 = new StringBuilder();
@@ -70,8 +70,8 @@ public class SpViewAppointments extends AppCompatActivity implements spViewAppoi
                 }
 
                 System.out.println(sp_details + " "+ sp_details1 + " "+Integer.parseInt(str0.toString()));
-                str2.append(sp_details); //sp name
-                str6.append(sp_details1); //sp city
+                str2.append(sp_details); //user name
+                str6.append(sp_details1); //user city
                 UserViewAppointment_Model_ArrayList.add(new
                         spViewAppointment_Model(Integer.parseInt(str0.toString()),String.valueOf(str2),String.valueOf(str6),
                         String.valueOf(str3),String.valueOf(str4),String.valueOf(str5)));
@@ -93,13 +93,14 @@ public class SpViewAppointments extends AppCompatActivity implements spViewAppoi
             recyclerView.setAdapter(adapter);
         }
     }
+
     @Override
     public void onItemClick(View view, int position) {
+        System.out.println(adapter.getItem(position));
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("BOOKING_ID", adapter.getItem(position));
         editor.commit();
 
-        startActivity(new Intent(SpViewAppointments.this,ServiceProviderHome.class));
     }
 }

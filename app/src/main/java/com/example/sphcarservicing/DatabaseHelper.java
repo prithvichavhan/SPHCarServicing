@@ -190,11 +190,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor viewBookingDataSP(Integer b_id){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE3_NAME + " WHERE BId = '"+b_id+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
     public Cursor spviewBookingData(String SPEmail){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE3_NAME + " WHERE SPEmail = '"+SPEmail+"'";
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         return cursor;
+    }
+
+    public boolean updateBookingRec(String Bid,String new_services,String new_Date, String new_type){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
+        ContentValues values = new ContentValues();
+        values.put(T3COL6,new_services);
+        values.put(T3COL5,new_Date);
+        values.put(T3COL4,new_type);
+        int i = sqLiteDatabase.update(TABLE3_NAME,
+                values,"BId=?",new String[]{Bid});
+        if(i>0)
+            return true;
+        else
+            return false;
     }
 
     public boolean deleteBookingData(String uemail,String t3id){

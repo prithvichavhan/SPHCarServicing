@@ -14,6 +14,7 @@
     <string name="cancel">Cancel</string>
     <string name="search">Search</string>
     <string name="select_services_from_below_available_in_the_list">Select services from below available in the list</string>
+    <string name="select_new_services_from_below_available_in_the_list">Select new services from below available in the list</string>
     <string name="upcoming_appointments">Upcoming Appointments</string>
     <string name="view_existing_service_history">Past Service History</string>
     <string name="login">Login</string>
