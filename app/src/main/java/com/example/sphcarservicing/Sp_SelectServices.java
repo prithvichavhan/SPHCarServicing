@@ -35,7 +35,7 @@ public class Sp_SelectServices extends AppCompatActivity {
         LinearLayout linearLayout = findViewById(R.id.linearLayout);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        Integer bookin_id = preferences.getInt("BOOKING_ID",10000);
+        Integer bookin_id = preferences.getInt("BOOKING_ID",0);
 
         dbh = new DatabaseHelper(this);
 
@@ -49,13 +49,13 @@ public class Sp_SelectServices extends AppCompatActivity {
             }
         }
 
-        Cursor cursor2 = dbh.viewSpecificServiceUserData(user_email.toString());
-        StringBuilder user_name = new StringBuilder();
-        if(cursor2.getCount()>0) {
-            while (cursor2.moveToNext()) {
-                user_name.append(cursor1.getString(1));
-            }
-        }
+//        Cursor cursor2 = dbh.viewSpecificServiceUserData(user_email.toString());
+//        StringBuilder user_name = new StringBuilder();
+//        if(cursor2.getCount()>0) {
+//            while (cursor2.moveToNext()) {
+//                user_name.append(cursor1.getString(1));
+//            }
+//        }
 
         Cursor cursor = dbh.viewSpecificServiceProviderData(comp_email.toString());
         StringBuilder strID = new StringBuilder();
@@ -84,8 +84,8 @@ public class Sp_SelectServices extends AppCompatActivity {
         TextView cn = findViewById(R.id.textServiceTitle);
         TextView add = findViewById(R.id.textServiceAddress);
 
-        cn.setText(user_name);
-        add.setText(user_email);
+        cn.setText(str1.toString());
+        add.setText(str2.toString());
 
 //        Log.d(TAG,str0.toString());
 //        Log.d(TAG,str1.toString());

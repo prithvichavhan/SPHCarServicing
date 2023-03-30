@@ -102,5 +102,6 @@ public class SpViewAppointments extends AppCompatActivity implements spViewAppoi
         editor.putInt("BOOKING_ID", adapter.getItem(position));
         editor.commit();
 
+        startActivity(new Intent(SpViewAppointments.this,Sp_SelectServices.class));
     }
 }
