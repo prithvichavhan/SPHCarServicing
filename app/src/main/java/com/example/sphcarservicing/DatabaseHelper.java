@@ -203,6 +203,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+    public Cursor viewNotificationData(String uemail){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE6_NAME + " WHERE UEMAIL = '"+uemail+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
 
 
     public Cursor viewUserData(String status){

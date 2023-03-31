@@ -33,6 +33,7 @@ public class UserHome extends AppCompatActivity {
         Button viewAppointment = findViewById(R.id.btnViewApt);
         Button viewServiceHistory = findViewById(R.id.btnViewHistory);
         Button logout = findViewById(R.id.btnLogout);
+        Button notifications = findViewById(R.id.notifications);
         TextView name = findViewById(R.id.txtName);
         ImageView userimg = findViewById(R.id.imgAvatar);
 
@@ -75,5 +76,8 @@ public class UserHome extends AppCompatActivity {
 
         //Launch View Service History Activity
         viewServiceHistory.setOnClickListener(view -> startActivity(new Intent(UserHome.this, ViewServiceHistory.class)));
+
+        //Launch View Service History Activity
+        notifications.setOnClickListener(view -> startActivity(new Intent(UserHome.this, ViewNotifications.class)));
     }
 }

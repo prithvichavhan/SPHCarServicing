@@ -94,6 +94,13 @@ public class ServiceProviderHome extends AppCompatActivity {
             }
         });
 
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ServiceProviderHome.this,SpViewNotifications.class));
+            }
+        });
+
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

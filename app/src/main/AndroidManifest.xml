@@ -54,6 +54,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ViewNotifications"
+            android:exported="false" />
+        <activity
+            android:name=".SpViewNotifications"
+            android:exported="false" />
+        <activity
             android:name=".ViewServiceHistory"
             android:exported="false" />
         <activity
