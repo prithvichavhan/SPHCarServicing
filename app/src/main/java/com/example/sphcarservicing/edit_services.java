@@ -46,6 +46,8 @@ public class edit_services extends AppCompatActivity {
             while (cursor.moveToNext()) {
                 bDATE.append(cursor.getString(3));
                 bSERVICES.append(cursor.getString(4));
+                bookingdate.setText(bDATE);
+                bDATE.setLength(0);
             }
         }
 
@@ -53,7 +55,6 @@ public class edit_services extends AppCompatActivity {
         useremail.setText(user_email);
         spemail.setEnabled(false);
         spemail.setText(sp_email);
-        bookingdate.setText(bDATE);
         bookingservices.setEnabled(false);
         bookingservices.setText(bSERVICES);
 

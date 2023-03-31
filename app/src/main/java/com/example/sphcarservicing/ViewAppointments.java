@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,15 @@ public class ViewAppointments extends AppCompatActivity implements UserViewAppoi
         String user_email = preferences.getString("EMAIL",null);
 
         UserViewAppointment_Model_ArrayList = new ArrayList<>();
+
+        Button sp_homeB5 = findViewById(R.id.sp_homeB5);
+
+        sp_homeB5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ViewAppointments.this,UserHome.class));
+            }
+        });
 
         dbh = new DatabaseHelper(this);
         Cursor cursor = dbh.viewBookingData(user_email);

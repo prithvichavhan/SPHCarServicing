@@ -59,7 +59,7 @@ public class UserHome extends AppCompatActivity {
             }
         });
 
-        userimg.setImageResource(R.drawable.ic_launcher_background);
+        userimg.setImageResource(R.drawable.newuser);
 
         //Launch Edit Profile Activity
         editProfile.setOnClickListener(view -> startActivity(new Intent(UserHome.this, EditProfile.class)));

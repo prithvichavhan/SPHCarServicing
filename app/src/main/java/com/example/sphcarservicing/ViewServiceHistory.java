@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,6 +31,14 @@ public class ViewServiceHistory extends AppCompatActivity implements ServiceHist
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String user_email = preferences.getString("EMAIL",null);
+
+        Button sp_homeB7 = findViewById(R.id.sp_homeB7);
+        sp_homeB7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ViewServiceHistory.this,UserHome.class));
+            }
+        });
 
         ServiceHistory_Model_ArrayList = new ArrayList<>();
 

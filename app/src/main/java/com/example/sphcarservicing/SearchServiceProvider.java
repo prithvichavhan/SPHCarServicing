@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,14 @@ public class SearchServiceProvider extends AppCompatActivity implements SearchAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_service_provider);
+
+        Button sp_homeB4 = findViewById(R.id.sp_homeB4);
+        sp_homeB4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SearchServiceProvider.this,UserHome.class));
+            }
+        });
 
         // calling method to
         // build recycler view.
@@ -95,7 +104,7 @@ public class SearchServiceProvider extends AppCompatActivity implements SearchAd
         if (filteredList.isEmpty()) {
             // if no item is added in filtered list we are
             // displaying a toast message as no data found.
-            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
         } else {
             // at last we are passing that filtered
             // list to our adapter class.

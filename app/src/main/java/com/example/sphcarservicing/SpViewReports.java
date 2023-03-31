@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class SpViewReports extends AppCompatActivity implements spViewReports_Adapter.ItemClickListener{
 
@@ -70,6 +71,9 @@ public class SpViewReports extends AppCompatActivity implements spViewReports_Ad
 //        editor.putString("UEMAIL", adapter.getItem2(position));
 //        editor.commit();
 
+        int min = 0;
+        int max = 20;
+        int number = (int)Math.floor(Math.random() * (max - min + 1) + min);
         String str = "";
         Cursor c = dbh.viewSpecificServiceReportDataNew(adapter.getItem1(position),adapter.getItem2(position),adapter.getItem3(position));
         StringBuilder str1 = new StringBuilder();
@@ -101,7 +105,7 @@ public class SpViewReports extends AppCompatActivity implements spViewReports_Ad
             }
         }
         try {
-            FileOutputStream fout = openFileOutput(adapter.getItem2(position)+".txt",MODE_APPEND);
+            FileOutputStream fout = openFileOutput(adapter.getItem2(position)+number+".txt",MODE_APPEND);
             fout.write(str.getBytes(StandardCharsets.UTF_8));
             fout.write("\n".getBytes(StandardCharsets.UTF_8));
             Toast.makeText(SpViewReports.this,"File is Downloaded!",Toast.LENGTH_LONG).show();
