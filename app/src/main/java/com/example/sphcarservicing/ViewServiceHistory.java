@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -71,7 +70,7 @@ public class ViewServiceHistory extends AppCompatActivity implements ServiceHist
                 if(isInserted){
                     Toast.makeText(ViewServiceHistory.this,"Data for service history is entered",Toast.LENGTH_SHORT).show();
                     count += 1;
-                    RecyclerView recyclerView = findViewById(R.id.recyclerView1);
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView1234);
                     recyclerView.setLayoutManager(new LinearLayoutManager(this));
                     adapter = new ServiceHistory_Adapter(ServiceHistory_Model_ArrayList,
                             this, this);
@@ -86,7 +85,7 @@ public class ViewServiceHistory extends AppCompatActivity implements ServiceHist
                 }
                 else {
                     Toast.makeText(ViewServiceHistory.this,"Sorry not registered",Toast.LENGTH_SHORT).show();
-                    RecyclerView recyclerView = findViewById(R.id.recyclerView1);
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView1234);
                     recyclerView.setLayoutManager(new LinearLayoutManager(this));
                     adapter = new ServiceHistory_Adapter(ServiceHistory_Model_ArrayList,
                             this, this);
@@ -97,7 +96,7 @@ public class ViewServiceHistory extends AppCompatActivity implements ServiceHist
             else {
                 Toast.makeText(this,"Service History",Toast.LENGTH_SHORT).show();
                 System.out.println(count);
-                RecyclerView recyclerView = findViewById(R.id.recyclerView1);
+                RecyclerView recyclerView = findViewById(R.id.recyclerView1234);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 adapter = new ServiceHistory_Adapter(ServiceHistory_Model_ArrayList,
                         this, this);
@@ -157,7 +156,7 @@ public class ViewServiceHistory extends AppCompatActivity implements ServiceHist
             }
 
             System.out.println(count);
-            RecyclerView recyclerView = findViewById(R.id.recyclerView1);
+            RecyclerView recyclerView = findViewById(R.id.recyclerView1234);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             adapter = new ServiceHistory_Adapter(ServiceHistory_Model_ArrayList,
                     this, this);

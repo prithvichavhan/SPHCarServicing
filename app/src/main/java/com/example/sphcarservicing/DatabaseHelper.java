@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     final static String DATABASE_NAME = "Information.db";
-    final static int DATABASE_VERSION = 38;
+    final static int DATABASE_VERSION = 40;
 
     //table1
     final static String TABLE1_NAME = "USERS";
@@ -114,7 +114,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(query);
 
         //t5
-        query = "CREATE TABLE " + TABLE5_NAME + "( " + T5COL1 + " TEXT PRIMARY KEY, " +
+        query = "CREATE TABLE " + TABLE5_NAME + "( " + T5COL1 + " INTEGER PRIMARY KEY, " +
                 T5COL2 + " TEXT," + T5COL3 + " TEXT," + T5COL4 + " TEXT," + T5COL5 + " TEXT,"
                 + T5COL6 + " TEXT," + T5COL7 + " TEXT)";
 
@@ -170,7 +170,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor viewSpecificServiceReportData(String spemail){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE5_NAME + " WHERE UEMAIL = '"+spemail+"'";
+        String query = "SELECT * FROM " + TABLE5_NAME + " WHERE SPEMAIL = '"+spemail+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor viewSpecificServiceReportDataNew(String uemail, String uname,String bdate){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE5_NAME + " WHERE (UEMAIL = '"+uemail+"' AND UNAME = '"+uname+"' AND BDATE = '"+bdate+"')";
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         return cursor;
     }

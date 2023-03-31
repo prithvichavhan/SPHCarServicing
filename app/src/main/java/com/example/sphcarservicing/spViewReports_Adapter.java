@@ -36,7 +36,7 @@ public class spViewReports_Adapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder)holder).serviceProviderName.setText(UserViewAppointment_Model_ArrayList.get(position).getusername());
-        ((ViewHolder)holder).serviceProviderAddress.setText(UserViewAppointment_Model_ArrayList.get(position).getusername());
+        ((ViewHolder)holder).serviceProviderAddress.setText(UserViewAppointment_Model_ArrayList.get(position).getuseremail());
         ((ViewHolder)holder).AppointDate.setText(UserViewAppointment_Model_ArrayList.get(position).getBdate());
         ((ViewHolder)holder).Service.setText(UserViewAppointment_Model_ArrayList.get(position).getservices());
     }
@@ -51,6 +51,9 @@ public class spViewReports_Adapter extends RecyclerView.Adapter{
     }
     String getItem2(int id){
         return UserViewAppointment_Model_ArrayList.get(id).getusername();
+    }
+    String getItem3(int id){
+        return UserViewAppointment_Model_ArrayList.get(id).getBdate();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

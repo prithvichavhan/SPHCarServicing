@@ -1,16 +1,12 @@
 package com.example.sphcarservicing;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -100,7 +96,7 @@ public class SpViewServiceHistory extends AppCompatActivity implements Sp_Servic
 
             }
 
-            RecyclerView recyclerView = findViewById(R.id.recyclerView1);
+            RecyclerView recyclerView = findViewById(R.id.recyclerView1234);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             adapter = new Sp_ServiceHistory_Adapter(ServiceHistory_Model_ArrayList,
                     this, this);
