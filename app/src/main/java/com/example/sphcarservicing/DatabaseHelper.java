@@ -55,6 +55,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     final static String T4COL5 = "BSERVICES";
     final static String T4COL6 = "S_SP_ID";
 
+    //table5
+    final static String TABLE5_NAME = "Service_Reports";
+    final static String T5COL1 = "SRId";
+    final static String T5COL2 = "UNAME";
+    final static String T5COL3 = "UEMAIL";
+    final static String T5COL4 = "SPNAME";
+    final static String T5COL5 = "SPEMAIL";
+    final static String T5COL6 = "BSERVICES";
+    final static String T5COL7 = "BDATE";
+
+    //table6
+    final static String TABLE6_NAME = "Notification";
+    final static String T6COL1 = "SId";
+    final static String T6COL2 = "SPEmail";
+    final static String T6COL3 = "UEMAIL";
+    final static String T6COL4 = "BDATE";
+    final static String T6COL5 = "BSERVICES";
+    final static String T6COL6 = "N_SP_ID";
+
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -94,6 +113,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(query);
 
+        //t5
+        query = "CREATE TABLE " + TABLE5_NAME + "( " + T5COL1 + " TEXT PRIMARY KEY, " +
+                T5COL2 + " TEXT," + T5COL3 + " TEXT," + T5COL4 + " TEXT," + T5COL5 + " TEXT,"
+                + T5COL6 + " TEXT," + T5COL7 + " TEXT)";
+
+        sqLiteDatabase.execSQL(query);
+
+        //t6
+        query = "CREATE TABLE " + TABLE6_NAME + "( " + T6COL1 + " INTEGER PRIMARY KEY, " +
+                T6COL2 + " TEXT," + T6COL3 + " TEXT," + T6COL4 + " TEXT," + T6COL5 + " TEXT,"
+                +  T6COL6 + " INTEGER,"
+                + " FOREIGN KEY ("+T6COL6+") REFERENCES "+TABLE3_NAME+" ("+T3COL1+") ON DELETE CASCADE)";
+
+        sqLiteDatabase.execSQL(query);
+
         if (!sqLiteDatabase.isReadOnly()) {
             // Enable foreign key constraints
             sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
@@ -106,7 +140,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE2_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE3_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE4_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE5_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE6_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+    public boolean addServiceReports(String UNAME,String UEMAIL, String SPNAME,String SPEMAIL,
+                                  String BSERVICES,String BDATE){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
+        ContentValues values = new ContentValues();
+        values.put(T5COL2,UNAME);
+        values.put(T5COL3,UEMAIL);
+        values.put(T5COL4,SPNAME);
+        values.put(T5COL5,SPEMAIL);
+        values.put(T5COL6,BSERVICES);
+        values.put(T5COL7,BDATE);
+
+        long l = sqLiteDatabase.insert(TABLE5_NAME,null,values);
+
+        if(l>0)
+            return true;
+        else
+            return false;
+    }
+    public boolean addNotification(String spemail,String uemail,String bdate,
+                                  String services,String N_SP_ID){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
+        ContentValues values = new ContentValues();
+        values.put(T6COL2,spemail);
+        values.put(T6COL3,uemail);
+        values.put(T6COL4,bdate);
+        values.put(T6COL5,services);
+        values.put(T6COL6,N_SP_ID);
+
+        long l = sqLiteDatabase.insert(TABLE6_NAME,null,values);
+
+        if(l>0)
+            return true;
+        else
+            return false;
     }
 
 
@@ -163,6 +243,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE4_NAME + " WHERE SPEmail = '"+sp_email+"'";
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         return cursor;
+    }
+
+    public Cursor viewSpecificServiceHistoryData(String uemail, String spemail){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE4_NAME + " WHERE (UEMAIL = '"+uemail+"' AND SPEmail = '"+spemail+"')";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
+    public boolean updateServiceRec(String uemail,String spemail,String bdate){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        if (!sqLiteDatabase.isReadOnly()) {
+            // Enable foreign key constraints
+            sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON;");
+        }
+        ContentValues values = new ContentValues();
+        values.put(T4COL4,bdate);
+        int i = sqLiteDatabase.update(TABLE4_NAME,
+                values,"(UEMAIL=? AND SPEmail=?)",new String[]{uemail,spemail});
+        if(i>0)
+            return true;
+        else
+            return false;
     }
 
 

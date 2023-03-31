@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
         <!-- text view for our course name -->
         <TextView
-            android:id="@+id/serviceProviderName"
+            android:id="@+id/userservicedname"
             android:layout_width="195dp"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -24,7 +24,7 @@
         <!-- text view for our course description -->
 
         <TextView
-            android:id="@+id/serviceProviderAddress"
+            android:id="@+id/useremail"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
@@ -38,7 +38,7 @@
             android:id="@+id/history"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/serviceProviderName"
+            android:layout_below="@id/userservicedname"
             android:layout_marginTop="0dp"
             android:padding="5dp"
             android:text="Details"

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,6 +22,8 @@ public class ServiceProviderHome extends AppCompatActivity {
     Button deletedUser;
     Button vewEditAppointment;
     Button alterServiceHistory;
+    Button generateReports;
+    Button notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,8 @@ public class ServiceProviderHome extends AppCompatActivity {
         deletedUser = findViewById(R.id.deletedUser);
         vewEditAppointment = findViewById(R.id.vewEditAppointment);
         alterServiceHistory = findViewById(R.id.alterServiceHistory);
+        generateReports = findViewById(R.id.generateReports);
+        notification = findViewById(R.id.notification);
 
         alterUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +85,12 @@ public class ServiceProviderHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ServiceProviderHome.this,SpViewServiceHistory.class));
+            }
+        });
+        generateReports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ServiceProviderHome.this,SpViewReports.class));
             }
         });
 

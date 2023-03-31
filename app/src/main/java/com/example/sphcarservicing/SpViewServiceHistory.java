@@ -54,7 +54,7 @@ public class SpViewServiceHistory extends AppCompatActivity implements Sp_Servic
         editor.putString("U_EMAIL", adapter.getItem(position));
         editor.commit();
 
-//        startActivity(new Intent(SpViewServiceHistory.this,Delete_user_profile.class));
+        startActivity(new Intent(SpViewServiceHistory.this,edit_services.class));
 
     }
 

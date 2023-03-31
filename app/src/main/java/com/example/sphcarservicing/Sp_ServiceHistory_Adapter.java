@@ -55,8 +55,8 @@ public class Sp_ServiceHistory_Adapter extends RecyclerView.Adapter{
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            serviceProviderName = itemView.findViewById(R.id.serviceProviderName);
-            serviceProviderAddress = itemView.findViewById(R.id.serviceProviderAddress);
+            serviceProviderName = itemView.findViewById(R.id.userservicedname);
+            serviceProviderAddress = itemView.findViewById(R.id.useremail);
             AppointDate = itemView.findViewById(R.id.AppointDate);
             Service = itemView.findViewById(R.id.Service);
             itemView.setOnClickListener(new View.OnClickListener() {

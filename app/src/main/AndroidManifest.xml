@@ -78,6 +78,9 @@
             android:name=".EditProfile2"
             android:exported="false" />
         <activity
+            android:name=".edit_services"
+            android:exported="false" />
+        <activity
             android:name=".Delete_user_profile"
             android:exported="false" />
         <activity

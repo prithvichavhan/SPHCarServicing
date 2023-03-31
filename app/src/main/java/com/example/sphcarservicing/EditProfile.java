@@ -27,9 +27,9 @@ public class EditProfile extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
 
         TextView email = findViewById(R.id.userEmail);
-        EditText name = findViewById(R.id.firstName);
-        EditText phone = findViewById(R.id.userPhone);
-        EditText address = findViewById(R.id.userAddress);
+        EditText name = findViewById(R.id.spEmail);
+        EditText phone = findViewById(R.id.bDate);
+        EditText address = findViewById(R.id.bServices);
         Button save = findViewById(R.id.btnDelete);
         Button cancel = findViewById(R.id.btnCancel);
 

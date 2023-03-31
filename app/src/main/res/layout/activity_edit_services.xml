@@ -6,28 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".EditProfile">
 
+
+    <TextView
+        android:id="@+id/txtHelloUser6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
+        android:text="BOOKING DATE"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spEmail" />
+
+    <TextView
+        android:id="@+id/txtHelloUser5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="16dp"
+        android:text="SERVICES"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bDate" />
+
+    <TextView
+        android:id="@+id/txtHelloUser4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Editing Service History"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtHelloUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/txtHello"
+        android:layout_marginTop="21dp"
+        android:text="Service Provider Email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/userEmail" />
 
     <EditText
         android:id="@+id/userEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="Get Email from DB"
+        android:hint="User Email"
         android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColorHint="#8D6E63"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="VisualLintTextFieldSize" />
 
+    <EditText
+        android:id="@+id/spEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="Service provider email"
+        android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,40 +85,21 @@
         tools:ignore="VisualLintTextFieldSize" />
 
     <EditText
-        android:id="@+id/spEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="Name from DB"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#8D6E63"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userEmail"
-        tools:ignore="VisualLintTextFieldSize" />
-
-    <EditText
         android:id="@+id/bDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="21dp"
         android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="Phone from DB"
+        android:hint="Booking Date"
         android:inputType="phone"
         android:minHeight="48dp"
         android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spEmail"
+        app:layout_constraintTop_toBottomOf="@+id/txtHelloUser6"
         tools:ignore="VisualLintTextFieldSize" />
 
     <EditText
@@ -77,17 +107,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="Address from DB"
-        android:inputType="textPostalAddress"
+        android:hint="Services"
         android:minHeight="48dp"
         android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bDate"
+        app:layout_constraintTop_toBottomOf="@+id/txtHelloUser5"
         tools:ignore="VisualLintTextFieldSize" />
 
     <Button
@@ -95,19 +124,18 @@
         style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:text="@string/btnSave"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bServices" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnCancel"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnCancel"
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="21dp"
         android:layout_marginEnd="8dp"
         android:text="@string/cancel"
         android:textSize="16sp"
