@@ -76,6 +76,13 @@ public class ServiceProviderHome extends AppCompatActivity {
             }
         });
 
+        alterServiceHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ServiceProviderHome.this,SpViewServiceHistory.class));
+            }
+        });
+
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -48,6 +48,9 @@
             android:name=".ViewServiceHistory"
             android:exported="false" />
         <activity
+            android:name=".SpViewServiceHistory"
+            android:exported="false" />
+        <activity
             android:name=".ViewAppointments"
             android:exported="false" />
         <activity

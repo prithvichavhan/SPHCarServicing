@@ -158,6 +158,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor viewServiceHistoryDataSP(String sp_email){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE4_NAME + " WHERE SPEmail = '"+sp_email+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
 
     //adding booking data
     public boolean addBookingData(String spemail,String uemail, String btype,String bdate,
