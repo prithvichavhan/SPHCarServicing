@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class ServiceProviderDeleteUser extends AppCompatActivity implements User
         buildRecyclerView();
 
         Button sp_home = findViewById(R.id.sp_homeB);
+
+        Toast.makeText(ServiceProviderDeleteUser.this,"Delete User",Toast.LENGTH_SHORT).show();
         sp_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

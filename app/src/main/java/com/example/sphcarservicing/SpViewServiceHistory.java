@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +26,7 @@ public class SpViewServiceHistory extends AppCompatActivity implements Sp_Servic
         setContentView(R.layout.activity_sp_view_service_history);
 
         Button sp_homeB2 = findViewById(R.id.sp_homeB2);
+        Toast.makeText(SpViewServiceHistory.this,"View/Edit Service History",Toast.LENGTH_SHORT).show();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String sp_email = preferences.getString("EMAIL",null);

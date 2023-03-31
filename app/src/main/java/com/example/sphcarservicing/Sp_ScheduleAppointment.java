@@ -25,7 +25,7 @@ public class Sp_ScheduleAppointment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule_appointment);
+        setContentView(R.layout.activity_sp_schedule_appointment);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String NEW_SERVICES = preferences.getString("NEW_SERVICES",null);
@@ -74,13 +74,13 @@ public class Sp_ScheduleAppointment extends AppCompatActivity {
                 isInserted = dbh.updateBookingRec(bookin_id.toString(),NEW_SERVICES,currdate[0],btype);
 
                 if(isInserted){
-                    Toast.makeText(Sp_ScheduleAppointment.this,"User data has been" +
-                            "updated!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Sp_ScheduleAppointment.this,"Appointment has been" +
+                            "Rescheduled!",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Sp_ScheduleAppointment.this,ServiceProviderHome.class));
                 }
                 else {
-                    Toast.makeText(Sp_ScheduleAppointment.this,"Sorry User data not" +
-                            " booked, " +
+                    Toast.makeText(Sp_ScheduleAppointment.this,"Sorry Appointment not" +
+                            " Rescheduled, " +
                             "try again later!",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Sp_ScheduleAppointment.this,ServiceProviderHome.class));
                 }

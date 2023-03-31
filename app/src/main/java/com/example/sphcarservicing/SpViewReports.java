@@ -31,6 +31,7 @@ public class SpViewReports extends AppCompatActivity implements spViewReports_Ad
         setContentView(R.layout.activity_spviewreports);
 
         Button sp_home_button = findViewById(R.id.sp_homeB3);
+        Toast.makeText(SpViewReports.this,"View/Download Service Reports",Toast.LENGTH_SHORT).show();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String sp_email = preferences.getString("EMAIL",null);

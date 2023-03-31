@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +31,8 @@ public class SpViewAppointments extends AppCompatActivity implements spViewAppoi
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String sp_email = preferences.getString("EMAIL",null);
+
+        Toast.makeText(SpViewAppointments.this,"View/Modify Appointments",Toast.LENGTH_SHORT).show();
 
         sp_home_button.setOnClickListener(new View.OnClickListener() {
             @Override

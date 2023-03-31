@@ -163,7 +163,7 @@ public class Sp_SelectServices extends AppCompatActivity {
                 editor.commit();
 
 
-                Toast.makeText(Sp_SelectServices.this,abc,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Sp_SelectServices.this,abc,Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(Sp_SelectServices.this,Sp_ScheduleAppointment.class));
             }
         });
