@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     final static String DATABASE_NAME = "Information.db";
-    final static int DATABASE_VERSION = 37;
+    final static int DATABASE_VERSION = 38;
 
     //table1
     final static String TABLE1_NAME = "USERS";
@@ -167,6 +167,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+
+    public Cursor viewSpecificServiceReportData(String spemail){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE5_NAME + " WHERE UEMAIL = '"+spemail+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
+    }
+
     public boolean addNotification(String spemail,String uemail,String bdate,
                                   String services,String N_SP_ID){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -230,6 +238,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+
+    public Cursor viewServiceHistoryDataAll(){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE4_NAME;
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        return cursor;
     }
     public Cursor viewServiceHistoryData(String uemail){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();

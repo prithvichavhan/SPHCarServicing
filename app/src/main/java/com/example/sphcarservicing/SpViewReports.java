@@ -42,7 +42,50 @@ public class SpViewReports extends AppCompatActivity implements spViewReports_Ad
 
         dbh = new DatabaseHelper(this);
 
-        Cursor cursor = dbh.spviewBookingData(sp_email);
+
+        Cursor viewServiceHistoryData = dbh.viewServiceHistoryData(sp_email);
+        StringBuilder spemail = new StringBuilder();
+        StringBuilder uemail = new StringBuilder();
+        StringBuilder bdate = new StringBuilder();
+        StringBuilder bservices = new StringBuilder();
+        if (viewServiceHistoryData.getCount() > 0) {
+            while (viewServiceHistoryData.moveToNext()) {
+                spemail.append(viewServiceHistoryData.getString(1));
+                uemail.append(viewServiceHistoryData.getString(2));
+                bdate.append(viewServiceHistoryData.getString(3));
+                bservices.append(viewServiceHistoryData.getString(4));
+
+                Cursor viewSpecificServiceUserData = dbh.viewSpecificServiceUserData(uemail.toString());
+                StringBuilder uname = new StringBuilder();
+                if (viewSpecificServiceUserData.getCount() > 0) {
+                    while (viewSpecificServiceUserData.moveToNext()) {
+                        uname.append(viewSpecificServiceUserData.getString(1));
+                    }
+                }
+                Cursor viewSpecificServiceProviderData = dbh.viewSpecificServiceProviderData(uemail.toString());
+                StringBuilder spname = new StringBuilder();
+                if (viewSpecificServiceProviderData.getCount() > 0) {
+                    while (viewSpecificServiceProviderData.moveToNext()) {
+                        spname.append(viewSpecificServiceProviderData.getString(1));
+                    }
+                }
+
+                dbh.addServiceReports(uname.toString(),uemail.toString(),spname.toString(),
+                        spemail.toString(),bservices.toString(),bdate.toString());
+
+                spemail.setLength(0);
+                uemail.setLength(0);
+                bdate.setLength(0);
+                bservices.setLength(0);
+                uname.setLength(0);
+                spname.setLength(0);
+            }
+        }
+
+
+
+
+        Cursor cursor = dbh.viewSpecificServiceReportData(sp_email);
         StringBuilder str0 = new StringBuilder();
         StringBuilder str1 = new StringBuilder();
         StringBuilder str2 = new StringBuilder();
@@ -52,30 +95,17 @@ public class SpViewReports extends AppCompatActivity implements spViewReports_Ad
         StringBuilder str6 = new StringBuilder();
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                str0.append(cursor.getString(0));
-                str1.append(cursor.getString(2)); //getting email of user
-                str3.append(cursor.getString(4)); //date
-                str4.append(cursor.getString(3)); //type
+                str0.append(cursor.getString(0));//id
+                str1.append(cursor.getString(2)); //uname
+                str2.append(cursor.getString(3)); //uemail
+                str3.append(cursor.getString(3)); //spname
+                str4.append(cursor.getString(3)); //spemail
                 str5.append(cursor.getString(5)); //services
+                str6.append(cursor.getString(5)); //bdate
 
-
-                System.out.println(str1);
-                Cursor cursor1 = dbh.viewSpecificServiceUserData(str1.toString());
-                StringBuilder sp_details = new StringBuilder();
-                StringBuilder sp_details1 = new StringBuilder();
-                if (cursor1.getCount() > 0) {
-                    while (cursor1.moveToNext()) {
-                        sp_details.append(cursor1.getString(1));
-                        sp_details1.append(cursor1.getString(2));
-                    }
-                }
-
-                System.out.println(sp_details + " "+ sp_details1 + " "+Integer.parseInt(str0.toString()));
-                str2.append(sp_details); //user name
-                str6.append(sp_details1); //user city
-//                UserViewAppointment_Model_ArrayList.add(new
-//                        spViewReports_Model(String.valueOf(str2),String.valueOf(str6),
-//                        String.valueOf(str3),String.valueOf(str4),String.valueOf(str5)));
+                UserViewAppointment_Model_ArrayList.add(new
+                        spViewReports_Model(String.valueOf(str1),String.valueOf(str2),
+                        String.valueOf(str6),String.valueOf(str5)));
 
                 str0.setLength(0);
                 str1.setLength(0);
@@ -84,15 +114,14 @@ public class SpViewReports extends AppCompatActivity implements spViewReports_Ad
                 str4.setLength(0);
                 str5.setLength(0);
                 str6.setLength(0);
-                sp_details.setLength(0);
-                sp_details1.setLength(0);
             }
-            RecyclerView recyclerView = findViewById(R.id.recyclerView1);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            adapter = new spViewReports_Adapter(UserViewAppointment_Model_ArrayList,
-                    this, this);
-            recyclerView.setAdapter(adapter);
         }
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView1);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new spViewReports_Adapter(UserViewAppointment_Model_ArrayList,
+                this, this);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -103,6 +132,6 @@ public class SpViewReports extends AppCompatActivity implements spViewReports_Ad
         editor.putString("UEMAIL", adapter.getItem2(position));
         editor.commit();
 
-        startActivity(new Intent(SpViewReports.this,Sp_SelectServices.class));
+//        startActivity(new Intent(SpViewReports.this,Sp_SelectServices.class));
     }
 }

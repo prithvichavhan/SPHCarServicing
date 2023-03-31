@@ -74,6 +74,7 @@ public class edit_services extends AppCompatActivity {
                         @Override
                         public void run() {
                             finish();
+                            preferences.edit().remove("U_EMAIL").commit();
                             startActivity(new Intent(edit_services.this,SpViewServiceHistory.class));
                         }
                     };
